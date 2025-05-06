@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js, NPM
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install npm package
+        run: npm ci
+
+      - name: run tests
+        run: npm run test
+
+      - name: Build
+        run: npm run build:win
+
+      - name: Package artifact
+        run: npm run package:win
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pso2ngs-chat-translator
+          path: pso2ngs-chat-translator/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: pso2ngs-chat-translator.zip

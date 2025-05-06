@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chat Log Tailer 1`] = `
+[
+  {
+    "group": "PUBLIC",
+    "id": "chat-message-189",
+    "message": "Test Multiple Line Message1",
+    "name": "TEST1",
+  },
+  {
+    "group": "PARTY",
+    "id": "chat-message-191",
+    "message": ""Test Message2"",
+    "name": "TEST2",
+  },
+  {
+    "group": "GUILD",
+    "id": "chat-message-192",
+    "message": "Test Message3",
+    "name": "TEST3",
+  },
+  {
+    "group": "PUBLIC",
+    "id": "chat-message-193",
+    "message": "Test Message4",
+    "name": "TEST4",
+  },
+]
+`;

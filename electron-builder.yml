@@ -1,0 +1,16 @@
+appId: com.electron.app
+productName: pso2ngs-chat-translator
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+  - '!{settings.json}'
+win:
+  target: portable
+  executableName: pso2ngs-chat-translator
+  icon: resources/icon.png
+  artifactName: ${name}.${ext}
+npmRebuild: false

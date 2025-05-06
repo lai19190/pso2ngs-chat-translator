@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-noto-sans-jp: 'Noto Sans JP', sans-serif;
+}
+
+::-webkit-scrollbar {
+  height: 15px;
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a4abbf54;
+  -webkit-border-radius: 1ex;
+}
+
+select {
+  text-align-last: right;
+}
+
+option {
+  background-color: #152238;
+}

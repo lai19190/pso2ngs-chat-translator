@@ -1,0 +1,14 @@
+node_modules/
+.vscode/
+dist/
+out/
+build/
+pso2ngs-chat-translator/
+
+*.log*
+*.zip
+
+.DS_Store
+.eslintcache
+settings.json
+todo.md
