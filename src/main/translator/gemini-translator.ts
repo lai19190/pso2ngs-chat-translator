@@ -38,7 +38,14 @@ export class GeminiTranslator implements Translator {
       message,
       targetLanguage
     }
-    const result = await this.chat.sendMessage({ message: JSON.stringify(translatorMessageInput) })
+    const result = await this.chat.sendMessage({
+      message: JSON.stringify(translatorMessageInput),
+      config: {
+        httpOptions: {
+          timeout: 1000
+        }
+      }
+    })
     return result.text ?? ''
   }
 }

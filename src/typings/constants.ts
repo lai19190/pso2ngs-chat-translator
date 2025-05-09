@@ -20,3 +20,5 @@ Output Format:
 - Return only the translated message.
 - No extra commentary or explanations.
 `.trim()
+
+export const DEFAULT_REQUEST_TIMEOUT = 2000

@@ -1,7 +1,7 @@
 import OpenAI from 'openai'
 import { Translator } from '../../typings/interface'
 import { Language, Settings, TranslatorMessageInput } from '../../typings/types'
-import { DEFAULT_SYSTEM_PROMPT } from '../../typings/constants'
+import { DEFAULT_REQUEST_TIMEOUT, DEFAULT_SYSTEM_PROMPT } from '../../typings/constants'
 
 export class OpenAITranslator implements Translator {
   private sourceLanguage: Language
@@ -46,11 +46,14 @@ export class OpenAITranslator implements Translator {
     }
     input.push({ role: 'user', content: JSON.stringify(translatorMessageInput) })
 
-    const response = await this.APIClient.responses.create({
-      model: this.model,
-      input: input,
-      previous_response_id: this.previousResponseID ?? undefined
-    })
+    const response = await this.APIClient.responses.create(
+      {
+        model: this.model,
+        input: input,
+        previous_response_id: this.previousResponseID ?? undefined
+      },
+      { timeout: DEFAULT_REQUEST_TIMEOUT }
+    )
     this.previousResponseID = response.id
 
     return response.output_text

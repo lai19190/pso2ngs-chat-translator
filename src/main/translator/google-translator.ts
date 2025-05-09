@@ -1,3 +1,4 @@
+import { DEFAULT_REQUEST_TIMEOUT } from '../../typings/constants'
 import { Translator } from '../../typings/interface'
 import { Language, Settings } from '../../typings/types'
 
@@ -13,14 +14,14 @@ export class GoogleTranslator implements Translator {
 
   async translateToDestinationLanguage(_name: string, message: string): Promise<string> {
     const translateURL = `${this.translationEndpoint}?client=gtx&dt=t&sl=${this.sourceLanguage}&tl=${this.destinationLanguage}&q=${encodeURIComponent(message)}`
-    const translationResponse = await fetch(translateURL)
+    const translationResponse = await fetch(translateURL, { signal: AbortSignal.timeout(DEFAULT_REQUEST_TIMEOUT) })
     const translationJson = JSON.parse(await translationResponse.text())
     return translationJson[0][0][0]
   }
 
   async translateToSourceLanguage(message: string): Promise<string> {
     const translateURL = `${this.translationEndpoint}?client=gtx&dt=t&sl=${this.destinationLanguage}&tl=${this.sourceLanguage}&q=${encodeURIComponent(message)}`
-    const translationResponse = await fetch(translateURL)
+    const translationResponse = await fetch(translateURL, { signal: AbortSignal.timeout(DEFAULT_REQUEST_TIMEOUT) })
     const translationJson = JSON.parse(await translationResponse.text())
     return translationJson[0][0][0]
   }
