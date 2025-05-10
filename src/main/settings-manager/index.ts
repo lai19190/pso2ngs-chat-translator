@@ -24,7 +24,8 @@ export class SettingsManager {
           showTransliteration: true,
           transliterationType: TransliterationType.Okurigana,
           openAI: {},
-          gemini: {}
+          gemini: {},
+          localLLM: {}
         },
         window: {
           width: 330,

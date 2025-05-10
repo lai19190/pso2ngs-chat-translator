@@ -49,6 +49,11 @@ export type Settings = {
       model?: string
       apiKey?: string
     }
+    localLLM: {
+      endpoint?: string
+      model?: string
+      apiKey?: string
+    }
   }
   window: Partial<Rectangle>
 }
@@ -73,7 +78,8 @@ export enum Language {
 export enum TranslatorType {
   OpenAI = 'OpenAI',
   Gemini = 'Gemini',
-  GoogleTranslate = 'Google Translate'
+  GoogleTranslate = 'Google Translate',
+  LocalLLM = 'Local LLM'
 }
 
 export type TranslatorMessageInput = {

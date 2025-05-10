@@ -8,6 +8,7 @@ import { kuroshiro, SetupKuroshiro } from './translator/kuroshiro'
 import { GoogleTranslator } from './translator/google-translator'
 import { OpenAITranslator } from './translator/openai-translator'
 import pLimit from 'p-limit'
+import { LocalLLMTranslator } from './translator/localllm-translator'
 
 export class ChatServiceController {
   private mainWindow: BrowserWindow
@@ -40,6 +41,9 @@ export class ChatServiceController {
           break
         case TranslatorType.GoogleTranslate:
           this.translator = new GoogleTranslator(settings)
+          break
+        case TranslatorType.LocalLLM:
+          this.translator = new LocalLLMTranslator(settings)
           break
       }
       this.chatLogTailer.startTailing()

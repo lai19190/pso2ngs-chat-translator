@@ -206,6 +206,23 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
               </div>
             </>
           )}
+          {settings?.translation.translator === TranslatorType.LocalLLM && (
+            <>
+              <div {...tabRowSubtitleStyle}>{t('LocalLLM')}</div>
+              <div {...tabColStyle}>
+                <label>{t('Endpoint')}</label>
+                <input className="w-full rounded border px-1" {...register('translation.localLLM.endpoint')} />
+              </div>
+              <div {...tabColStyle}>
+                <label>{t('Model')}</label>
+                <input className="w-full rounded border px-1" {...register('translation.localLLM.model')} />
+              </div>
+              <div {...tabColStyle}>
+                <label>{t('API Key')}</label>
+                <input className="w-full rounded border px-1" {...register('translation.localLLM.apiKey')} />
+              </div>
+            </>
+          )}
         </TabPanel>
       </Tabs>
     </form>
