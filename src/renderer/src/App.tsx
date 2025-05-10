@@ -14,6 +14,8 @@ export default function App(): JSX.Element {
   const [settings, setSettings] = useState<Settings>()
   const { systemFontClassName, transliterationFontClassName } = getFontSize(settings)
 
+  let hoveredTimeout: NodeJS.Timeout | null = null
+
   // fetch settings from store at start
   useEffect(() => {
     ;(async (): Promise<void> => {
@@ -46,12 +48,11 @@ export default function App(): JSX.Element {
   return (
     <div
       className={`font-ngs flex h-screen w-screen flex-col overflow-hidden rounded-lg bg-blue-500/30 p-1.5 ${systemFontClassName}`}
-      onMouseEnter={() => {
-        setHovered(true)
-      }}
-      onMouseLeave={() => {
-        setHovered(false)
-      }}
+      // tracking JP IME Composition State, avoid unexpcted unhovering
+      onCompositionStart={onHovered}
+      onCompositionUpdate={onHovered}
+      onMouseOver={onHovered}
+      onMouseLeave={onUnhovered}
     >
       <TitleBar content={content} setContent={setContent} onSaveSettingToStore={onSaveSettingToStore} />
       {onTranslationWindow && (
@@ -68,6 +69,19 @@ export default function App(): JSX.Element {
       {onSettingsWindow && <SettingsPage settings={settings} setSettings={setSettings} />}
     </div>
   )
+
+  function onHovered(): void {
+    setHovered(true)
+    if (hoveredTimeout) {
+      clearTimeout(hoveredTimeout)
+    }
+  }
+
+  function onUnhovered(): void {
+    hoveredTimeout = setTimeout(() => {
+      setHovered(false)
+    }, 1000)
+  }
 
   function onSaveSettingToStore(): void {
     if (settings) {
