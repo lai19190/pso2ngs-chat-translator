@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --font-noto-sans-jp: 'Noto Sans JP', sans-serif;
+  --font-ngs: 'ngs-font', sans-serif;
+}
+
+@font-face {
+  font-family: 'ngs-font';
+  src: url('src/assets/fonts/ngs_font.ttf') format('truetype');
 }
 
 ::-webkit-scrollbar {

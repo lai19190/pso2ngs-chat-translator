@@ -45,7 +45,7 @@ export default function App(): JSX.Element {
 
   return (
     <div
-      className={`font-noto-sans-jp flex h-screen w-screen flex-col overflow-hidden rounded-lg bg-blue-500/30 p-1.5 ${systemFontClassName}`}
+      className={`font-ngs flex h-screen w-screen flex-col overflow-hidden rounded-lg bg-blue-500/30 p-1.5 ${systemFontClassName}`}
       onMouseEnter={() => {
         setHovered(true)
       }}
