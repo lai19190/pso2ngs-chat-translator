@@ -18,6 +18,9 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
   } = useForm<Settings>({ defaultValues: settings })
   const { t } = useTranslation()
 
+  const geminiModelIDs = ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-1.5-pro', 'gemini-1.5-flash']
+  const openAIModelIDs = ['gpt-4.1', 'gpt-4.1-nano', 'gpt-4o-mini', 'o4-mini', 'o3']
+
   // save settings for each change
   useEffect(() => {
     if (isDirty) {
@@ -166,10 +169,13 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
                 <label>{t('Model')}</label>
                 <input className="w-full rounded border px-1" list="openAI-model" {...register('translation.openAI.model')} />
                 <datalist id="openAI-model">
-                  <option value="gpt-4.1">gpt-4.1</option>
-                  <option value="gpt-4o-mini">gpt-4o-mini</option>
-                  <option value="o4-mini">o4-mini</option>
-                  <option value="o3">o3</option>
+                  {openAIModelIDs.map((model) => {
+                    return (
+                      <option key={model} value={model}>
+                        {model}
+                      </option>
+                    )
+                  })}
                 </datalist>
               </div>
               <div {...tabColStyle}>
@@ -185,10 +191,13 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
                 <label>{t('Model')}</label>
                 <input className="w-full rounded border px-1" list="gemini-model" {...register('translation.gemini.model')} />
                 <datalist id="gemini-model">
-                  <option value="gemini-2.0-flash">gemini-2.0-flash</option>
-                  <option value="gemini-2.0-flash-lite">gemini-2.0-flash-lite</option>
-                  <option value="gemini-1.5-pro">gemini-1.5-pro</option>
-                  <option value="gemini-1.5-flash">gemini-1.5-flash</option>
+                  {geminiModelIDs.map((model) => {
+                    return (
+                      <option key={model} value={model}>
+                        {model}
+                      </option>
+                    )
+                  })}
                 </datalist>
               </div>
               <div {...tabColStyle}>
