@@ -14,11 +14,14 @@ Translation Rules:
 4. Preserve the tone, personality, in-game slang, and kaomoji in your translation.
 5. Remember each speaker's style and personality over time to improve translation accuracy.
 6. Keep translations natural and casual, appropriate for in-game chat.
-7. If the message is already written in the target language, return it unchanged.
+7. If the whole message is already written in the target language or untranslatable, return it unchanged.
 
 Output Format:
-- Return only the translated message.
+- Return only the translated message text.
+- Do not return a JSON object.
+- Do not include any field names or formatting.
+- Output must be a plain text message only.
 - No extra commentary or explanations.
 `.trim()
 
-export const DEFAULT_REQUEST_TIMEOUT = 2000
+export const DEFAULT_REQUEST_TIMEOUT = 5000

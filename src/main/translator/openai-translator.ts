@@ -36,7 +36,7 @@ export class OpenAITranslator implements Translator {
   private async translate(name: string, message: string, targetLanguage: Language): Promise<string> {
     const input: OpenAI.Responses.ResponseInput = []
     if (!this.previousResponseID) {
-      input.push({ role: 'developer', content: this.systemPrompt })
+      input.push({ role: 'system', content: this.systemPrompt })
     }
 
     const translatorMessageInput: TranslatorMessageInput = {

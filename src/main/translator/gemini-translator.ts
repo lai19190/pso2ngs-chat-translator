@@ -1,7 +1,7 @@
 import { GoogleGenAI, Chat } from '@google/genai'
 import { Translator } from '../../typings/interface'
 import { Language, Settings, TranslatorMessageInput } from '../../typings/types'
-import { DEFAULT_SYSTEM_PROMPT } from '../../typings/constants'
+import { DEFAULT_REQUEST_TIMEOUT, DEFAULT_SYSTEM_PROMPT } from '../../typings/constants'
 
 export class GeminiTranslator implements Translator {
   private sourceLanguage: Language
@@ -42,7 +42,7 @@ export class GeminiTranslator implements Translator {
       message: JSON.stringify(translatorMessageInput),
       config: {
         httpOptions: {
-          timeout: 1000
+          timeout: DEFAULT_REQUEST_TIMEOUT
         }
       }
     })
