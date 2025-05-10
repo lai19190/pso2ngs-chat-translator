@@ -1,4 +1,4 @@
-# 夢幻之星 Online 2：新世紀 聊天翻譯器
+# 夢幻之星 Online 2：新世紀 聊天翻譯工具
 
 [English](./README.md) | [日本語](./README-JA.md)
 
@@ -7,7 +7,7 @@
 ## 功能特色
 
 - **即時翻譯**：即時翻譯聊天訊息，支援多種語言互譯。
-- **翻譯器選項**：
+- **翻譯選項**：
   - OpenAI
   - Gemini AI
   - Google Translate
@@ -23,7 +23,7 @@
 
 1. 啟動應用程式。
 2. 在「設定」頁籤中進行設定：
-   - 選擇你偏好的翻譯器（例如：OpenAI）
+   - 選擇你偏好的翻譯（例如：OpenAI）
    - 若有需要，設定模型與 API 金鑰
      - OpenAI：[模型](https://platform.openai.com/docs/models)、[API 金鑰](https://platform.openai.com/api-keys)
      - Gemini：[模型](https://ai.google.dev/gemini-api/docs/models)、[API 金鑰](https://ai.google.dev/gemini-api/docs/api-key)
