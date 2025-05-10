@@ -5,6 +5,7 @@
   "Error when translating chat message": "翻譯聊天訊息時發生錯誤",
   "Please set OpenAI model or api key": "請設置OpenAI模型和API金鑰",
   "Please set Gemini model or api key": "請設置Gemini模型和API金鑰",
+  "Welcome to the PSO2NGS Chat Translator!": "歡迎使用PSO2NGS聊天翻譯工具！",
 
   "General": "一般",
   "Translation": "翻譯",

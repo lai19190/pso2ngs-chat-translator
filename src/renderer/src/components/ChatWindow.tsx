@@ -20,8 +20,8 @@ export type ChatWindowProps = {
 }
 
 export default function ChatWindow({ hovered, messages, transliterationFontClassName, showTransliteration }: ChatWindowProps): JSX.Element {
-  const messagesEndRef = useRef<null | HTMLDivElement>(null)
-  const chatWindowDivRef = useRef<null | HTMLDivElement>(null)
+  const messagesEndRef = useRef<HTMLDivElement | null>(null)
+  const chatWindowDivRef = useRef<HTMLDivElement | null>(null)
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -36,6 +36,7 @@ export default function ChatWindow({ hovered, messages, transliterationFontClass
   return (
     <div ref={chatWindowDivRef} className="w-full flex-grow overflow-y-scroll bg-gray-950/50 p-1 text-base wrap-break-word">
       <p>
+        <span className="block pb-1 text-white">{t('Welcome to the PSO2NGS Chat Translator!')}</span>
         {messages?.map((message: ChatMessage | SystemMessage) => {
           if (isChatMessage(message)) {
             return renderChatMessage(message)
@@ -68,7 +69,7 @@ export default function ChatWindow({ hovered, messages, transliterationFontClass
 
   function renderSystemMessage(systemMessage: SystemMessage): JSX.Element {
     return (
-      <span key={systemMessage.id} style={{ color: '#D0F0F0' }} className="block">
+      <span key={systemMessage.id} style={{ color: '#D0F0F0' }} className="block pb-1">
         [{t('SYSTEM')}] {t(systemMessage.message)} <br />
         {t(systemMessage.error?.message ?? '')}
       </span>

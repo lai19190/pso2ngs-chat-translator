@@ -5,6 +5,7 @@
   "Error when translating chat message": "Error when translating chat message",
   "Please set OpenAI model or api key": "Please set OpenAI model or api key",
   "Please set Gemini model or api key": "Please set Gemini model or api key",
+  "Welcome to the PSO2NGS Chat Translator!": "Welcome to the PSO2NGS Chat Translator!",
 
   "General": "General",
   "Translation": "Translation",
