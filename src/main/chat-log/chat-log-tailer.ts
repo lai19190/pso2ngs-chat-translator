@@ -1,23 +1,17 @@
 import * as readline from 'readline'
 import * as fs from 'fs'
+import moment from 'moment-timezone'
 import { ChatGroup, ChatMessage } from '../../typings/types'
 import { SanitizeChatMessage } from './chat-santizer'
 import EventEmitter from 'events'
 import { app } from 'electron'
-import { globSync } from 'glob'
 
 export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: ChatMessage] }> {
   private logFilePath?: string
   private chatRegex = /(?<datetime>.+)\t(?<id>.+)\t(?<group>.+)\t(?<playerID>.+)\t(?<playerName>.+)\t(?<message>.+)/
 
   startTailing(): void {
-    const logFolderPath = `${app.getPath('documents')}/SEGA/PHANTASYSTARONLINE2/log_ngs`
-    // find the latest chat log file of current year
-    const currentYear = new Date().getFullYear()
-    const logFilePath = globSync(`ChatLog${currentYear}*.txt`, { stat: true, withFileTypes: true, cwd: logFolderPath })
-      .sort((a, b) => a.mtimeMs! - b.mtimeMs!)
-      .map((path) => path.fullpath())
-      .at(-1)!
+    const logFilePath = `${app.getPath('documents')}/SEGA/PHANTASYSTARONLINE2/log_ngs/ChatLog${moment().tz('Asia/Tokyo').format('YYYYMMDD')}_00.txt`
     this.logFilePath = logFilePath
     // watch the file for changes
     fs.watchFile(logFilePath, { interval: 500 }, async (curr, prev) => {
