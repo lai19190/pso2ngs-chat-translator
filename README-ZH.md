@@ -4,12 +4,18 @@
 
 一款為日系線上遊戲 **夢幻之星 Online 2：新世紀 (PSO2NGS)** 所設計的多語言即時聊天翻譯工具。
 
+## 介面
+
+![介面](/docs/images/user_interface.png)
+
 ## 功能特色
 
 - **即時翻譯**：即時翻譯聊天訊息，支援多種語言互譯。
 - **翻譯選項**：
   - OpenAI
   - Gemini AI
+  - 本地 LLM
+    - 需要相容 OpenAI API，例如 Ollama
   - Google Translate
 - **日語羅馬字支援**：可將日文轉寫為羅馬拼音（振假名、送假名）
 

@@ -4,12 +4,18 @@
 
 A multi-language chat translator for the Japanese MMO game **Phantasy Star Online 2: New Genesis (PSO2NGS)**.
 
+## User Interface
+
+![User Interface](/docs/images/user_interface.png)
+
 ## Features
 
 - **Real-time Translation**: Translate chat messages to and from multiple languages.
 - **Translator Options**:
   - OpenAI
   - Gemini AI
+  - Local LLM
+    - OpenAI API compatible, e.g. Ollama
   - Google Translate
 - **Transliteration Support**: Convert Japanese text to Romaji (Furigana, Okurigana)
 
