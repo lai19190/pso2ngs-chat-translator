@@ -2,7 +2,7 @@ const regexs: Record<string, RegExp> = {
   symbolRegex: /^\/symbol\d+/,
   stampRegex: /^\/(st|stamp) \d+/,
   laRegex: /^\/(la|fla|mla|cla) \S+(?: s\d+\.\d+)?(?: (ha|lha|rha) \w+)?/,
-  cfRegex: /^\/cf (?:on|off|sync|stop)?/,
+  cfRegex: /^\/cf(?: (?:all))?(?: (?:on|off|sync|stop))?/,
   fcRegex: /^\/(face|fc)\d?(?: (?:stop|off))?/,
   ceRegex: /^\/ce(?:all|\d)?(?: (?:stop|on|off))?/,
   mnRegex: /^\/mn\d+/,
