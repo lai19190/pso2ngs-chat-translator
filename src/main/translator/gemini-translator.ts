@@ -19,9 +19,10 @@ export class GeminiTranslator implements Translator {
     this.APIClient = new GoogleGenAI({ apiKey: geminiConfig.apiKey })
     this.chat = this.APIClient.chats.create({
       model: geminiConfig.model,
-      config: {
-        systemInstruction: DEFAULT_SYSTEM_PROMPT
-      }
+      history: [
+        { role: 'user', parts: [{ text: DEFAULT_SYSTEM_PROMPT }] },
+        { role: 'model', parts: [{ text: 'Ok' }] }
+      ]
     })
   }
 

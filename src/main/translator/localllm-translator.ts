@@ -13,7 +13,7 @@ export class LocalLLMTranslator implements Translator {
   private destinationLanguage: Language
   private APIClient: OpenAI
   private model: string
-  private messages: ChatCompletionMessageParam[] = [{ role: 'system', content: DEFAULT_SYSTEM_PROMPT }]
+  private messages: ChatCompletionMessageParam[]
 
   constructor(settings: Settings) {
     const localLLMConfig = settings.translation.localLLM
@@ -27,6 +27,7 @@ export class LocalLLMTranslator implements Translator {
       apiKey: localLLMConfig.apiKey
     })
     this.model = localLLMConfig.model
+    this.messages = [{ role: 'system', content: DEFAULT_SYSTEM_PROMPT }]
   }
 
   async translateToDestinationLanguage(name: string, message: string): Promise<string> {
