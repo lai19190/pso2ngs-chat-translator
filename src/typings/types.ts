@@ -50,7 +50,7 @@ export type Settings = {
       apiKey?: string
     }
     localLLM: {
-      endpoint?: string
+      apiEndpoint?: string
       model?: string
       apiKey?: string
     }

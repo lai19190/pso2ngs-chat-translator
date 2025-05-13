@@ -208,10 +208,10 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
           )}
           {settings?.translation.translator === TranslatorType.LocalLLM && (
             <>
-              <div {...tabRowSubtitleStyle}>{t('LocalLLM')}</div>
+              <div {...tabRowSubtitleStyle}>{t('Local LLM')}</div>
               <div {...tabColStyle}>
-                <label>{t('Endpoint')}</label>
-                <input className="w-full rounded border px-1" {...register('translation.localLLM.endpoint')} />
+                <label>{t('API Endpoint')}</label>
+                <input className="w-full rounded border px-1" {...register('translation.localLLM.apiEndpoint')} />
               </div>
               <div {...tabColStyle}>
                 <label>{t('Model')}</label>

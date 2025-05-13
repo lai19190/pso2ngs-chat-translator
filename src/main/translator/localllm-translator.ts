@@ -17,13 +17,13 @@ export class LocalLLMTranslator implements Translator {
 
   constructor(settings: Settings) {
     const localLLMConfig = settings.translation.localLLM
-    if (!localLLMConfig.endpoint || !localLLMConfig.model) {
+    if (!localLLMConfig.apiEndpoint || !localLLMConfig.model) {
       throw new Error('Please set local LLM endpoint and model')
     }
     this.sourceLanguage = settings.translation.sourceLanguage
     this.destinationLanguage = settings.translation.destinationLanguage
     this.APIClient = new OpenAI({
-      baseURL: localLLMConfig.endpoint,
+      baseURL: localLLMConfig.apiEndpoint,
       apiKey: localLLMConfig.apiKey
     })
     this.model = localLLMConfig.model
