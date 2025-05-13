@@ -34,7 +34,7 @@ export default function ChatWindow({ hovered, messages, transliterationFontClass
   }, [messages, hovered])
 
   return (
-    <div ref={chatWindowDivRef} className="w-full flex-grow overflow-y-scroll bg-gray-950/50 p-1 text-base wrap-break-word">
+    <div ref={chatWindowDivRef} className="w-full flex-grow overflow-y-scroll bg-gray-950/50 p-1 wrap-break-word">
       <p>
         <span className="block pb-1 text-white">{t('Welcome to the PSO2NGS Chat Translator!')}</span>
         {messages?.map((message: ChatMessage | SystemMessage) => {
