@@ -1,15 +1,17 @@
-import { GoogleGenAI, Chat } from '@google/genai'
+import { GoogleGenAI } from '@google/genai'
 import { Translator } from '../../typings/interface'
-import { Language, Settings, TranslatorMessageInput } from '../../typings/types'
+import { ChatMessage, Language, Settings, TranslatorMessageInput } from '../../typings/types'
 import { DEFAULT_REQUEST_TIMEOUT, DEFAULT_SYSTEM_PROMPT } from '../../typings/constants'
+import { GeneratePromptWithChatHistory } from './utils'
 
 export class GeminiTranslator implements Translator {
   private sourceLanguage: Language
   private destinationLanguage: Language
   private APIClient: GoogleGenAI
-  private chat: Chat
+  private model: string
+  private chatHistory: ChatMessage[]
 
-  constructor(settings: Settings) {
+  constructor(settings: Settings, chatHistory: ChatMessage[]) {
     const geminiConfig = settings.translation.gemini
     if (!geminiConfig.apiKey || !geminiConfig.model) {
       throw new Error('Please set Gemini model or api key')
@@ -17,13 +19,8 @@ export class GeminiTranslator implements Translator {
     this.sourceLanguage = settings.translation.sourceLanguage
     this.destinationLanguage = settings.translation.destinationLanguage
     this.APIClient = new GoogleGenAI({ apiKey: geminiConfig.apiKey })
-    this.chat = this.APIClient.chats.create({
-      model: geminiConfig.model,
-      history: [
-        { role: 'user', parts: [{ text: DEFAULT_SYSTEM_PROMPT }] },
-        { role: 'model', parts: [{ text: 'Ok' }] }
-      ]
-    })
+    this.model = geminiConfig.model
+    this.chatHistory = chatHistory
   }
 
   async translateToDestinationLanguage(name: string, message: string): Promise<string> {
@@ -39,9 +36,12 @@ export class GeminiTranslator implements Translator {
       message,
       targetLanguage
     }
-    const result = await this.chat.sendMessage({
-      message: JSON.stringify(translatorMessageInput),
+    const systemPrompt = GeneratePromptWithChatHistory(DEFAULT_SYSTEM_PROMPT, this.chatHistory)
+    const result = await this.APIClient.models.generateContent({
+      model: this.model,
+      contents: JSON.stringify(translatorMessageInput),
       config: {
+        systemInstruction: systemPrompt,
         httpOptions: {
           timeout: DEFAULT_REQUEST_TIMEOUT
         }

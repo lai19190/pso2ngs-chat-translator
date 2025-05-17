@@ -1,17 +1,17 @@
 import OpenAI from 'openai'
 import { Translator } from '../../typings/interface'
-import { Language, Settings, TranslatorMessageInput } from '../../typings/types'
+import { ChatMessage, Language, Settings, TranslatorMessageInput } from '../../typings/types'
 import { DEFAULT_REQUEST_TIMEOUT, DEFAULT_SYSTEM_PROMPT } from '../../typings/constants'
+import { GeneratePromptWithChatHistory } from './utils'
 
 export class OpenAITranslator implements Translator {
   private sourceLanguage: Language
   private destinationLanguage: Language
   private APIClient: OpenAI
   private model: string
-  private systemPrompt: string
-  private previousResponseID?: string
+  private chatHistory: ChatMessage[]
 
-  constructor(settings: Settings) {
+  constructor(settings: Settings, chatHistory: ChatMessage[]) {
     const openAIConfig = settings.translation.openAI
     if (!openAIConfig.apiKey || !openAIConfig.model) {
       throw new Error('Please set OpenAI model or api key')
@@ -22,7 +22,7 @@ export class OpenAITranslator implements Translator {
       apiKey: openAIConfig.apiKey
     })
     this.model = openAIConfig.model
-    this.systemPrompt = DEFAULT_SYSTEM_PROMPT
+    this.chatHistory = chatHistory
   }
 
   async translateToDestinationLanguage(name: string, message: string): Promise<string> {
@@ -34,27 +34,25 @@ export class OpenAITranslator implements Translator {
   }
 
   private async translate(name: string, message: string, targetLanguage: Language): Promise<string> {
-    const input: OpenAI.Responses.ResponseInput = []
-    if (!this.previousResponseID) {
-      input.push({ role: 'system', content: this.systemPrompt })
-    }
-
     const translatorMessageInput: TranslatorMessageInput = {
       name,
       message,
       targetLanguage
     }
-    input.push({ role: 'user', content: JSON.stringify(translatorMessageInput) })
+
+    const systemPrompt = GeneratePromptWithChatHistory(DEFAULT_SYSTEM_PROMPT, this.chatHistory)
+    const input: OpenAI.Responses.ResponseInput = [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: JSON.stringify(translatorMessageInput) }
+    ]
 
     const response = await this.APIClient.responses.create(
       {
         model: this.model,
-        input: input,
-        previous_response_id: this.previousResponseID ?? undefined
+        input: input
       },
       { timeout: DEFAULT_REQUEST_TIMEOUT }
     )
-    this.previousResponseID = response.id
 
     return response.output_text
   }

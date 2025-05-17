@@ -17,6 +17,7 @@ export class ChatServiceController {
   private settings?: Settings
   private translator?: Translator
 
+  private chatHistory: ChatMessage[] = []
   private systemMessageCount = 0
   private queue = pLimit(1)
 
@@ -34,17 +35,19 @@ export class ChatServiceController {
       this.settings = settings
       switch (settings.translation.translator) {
         case TranslatorType.Gemini:
-          this.translator = new GeminiTranslator(settings)
+          this.translator = new GeminiTranslator(settings, this.chatHistory)
           break
         case TranslatorType.OpenAI:
-          this.translator = new OpenAITranslator(settings)
+          this.translator = new OpenAITranslator(settings, this.chatHistory)
+          break
+        case TranslatorType.LocalLLM:
+          this.translator = new LocalLLMTranslator(settings, this.chatHistory)
           break
         case TranslatorType.GoogleTranslate:
           this.translator = new GoogleTranslator(settings)
           break
-        case TranslatorType.LocalLLM:
-          this.translator = new LocalLLMTranslator(settings)
-          break
+        default:
+          throw new Error(`Unknown translator type: ${settings.translation.translator}`)
       }
       this.chatLogTailer.startTailing()
       this.notifyNewSystemMessage(`System Initialized`)
@@ -64,19 +67,32 @@ export class ChatServiceController {
 
   async notifyNewChatMessage(chatMessage: ChatMessage): Promise<void> {
     try {
-      const translatedChatMessage = await this.translator!.translateToDestinationLanguage(chatMessage.name, chatMessage.message)
+      if (!this.translator) {
+        throw new Error(`Translator not initialized`)
+      }
+      const translatedChatMessage = await this.translator.translateToDestinationLanguage(chatMessage.name, chatMessage.message)
       chatMessage.translation = translatedChatMessage
       if (this.settings?.translation.showTransliteration) {
         const detectedLanguage = franc(chatMessage.message, { minLength: 1 })
         if (detectedLanguage === 'jpn') {
+          // add transliteration to the message
           const transliteration = await kuroshiro.convert(chatMessage.message, {
             mode: this.settings.translation.transliterationType,
             to: 'hiragana'
           })
           chatMessage.transliteration = transliteration
+        } else {
+          // display the original message
+          chatMessage.transliteration = chatMessage.message
         }
       }
       this.mainWindow.webContents.send('new-message', chatMessage)
+
+      // store the chat message in history, limit to 10 messages
+      this.chatHistory.push(chatMessage)
+      if (this.chatHistory.length > 10) {
+        this.chatHistory.shift()
+      }
     } catch (error) {
       this.notifyNewSystemMessage(`Error when translating chat message`, error as Error)
     }
@@ -93,6 +109,9 @@ export class ChatServiceController {
   }
 
   async translateInputMessage(message: string): Promise<string> {
-    return this.translator!.translateToSourceLanguage(message)
+    if (!this.translator) {
+      throw new Error(`Translator not initialized`)
+    }
+    return this.translator.translateToSourceLanguage(message)
   }
 }

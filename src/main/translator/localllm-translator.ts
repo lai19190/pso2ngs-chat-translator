@@ -1,7 +1,8 @@
 import OpenAI from 'openai'
 import { Translator } from '../../typings/interface'
-import { Language, Settings, TranslatorMessageInput } from '../../typings/types'
+import { ChatMessage, Language, Settings, TranslatorMessageInput } from '../../typings/types'
 import { DEFAULT_REQUEST_TIMEOUT, DEFAULT_SYSTEM_PROMPT } from '../../typings/constants'
+import { GeneratePromptWithChatHistory } from './utils'
 
 type ChatCompletionMessageParam =
   | OpenAI.Chat.ChatCompletionUserMessageParam
@@ -13,9 +14,9 @@ export class LocalLLMTranslator implements Translator {
   private destinationLanguage: Language
   private APIClient: OpenAI
   private model: string
-  private messages: ChatCompletionMessageParam[]
+  private chatHistory: ChatMessage[]
 
-  constructor(settings: Settings) {
+  constructor(settings: Settings, chatHistory: ChatMessage[]) {
     const localLLMConfig = settings.translation.localLLM
     if (!localLLMConfig.apiEndpoint || !localLLMConfig.model) {
       throw new Error('Please set local LLM endpoint and model')
@@ -27,7 +28,7 @@ export class LocalLLMTranslator implements Translator {
       apiKey: localLLMConfig.apiKey
     })
     this.model = localLLMConfig.model
-    this.messages = [{ role: 'system', content: DEFAULT_SYSTEM_PROMPT }]
+    this.chatHistory = chatHistory
   }
 
   async translateToDestinationLanguage(name: string, message: string): Promise<string> {
@@ -44,18 +45,22 @@ export class LocalLLMTranslator implements Translator {
       message,
       targetLanguage
     }
-    this.messages.push({ role: 'user', content: JSON.stringify(translatorMessageInput) })
+
+    const systemPrompt = GeneratePromptWithChatHistory(DEFAULT_SYSTEM_PROMPT, this.chatHistory)
+    const messages: ChatCompletionMessageParam[] = [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: JSON.stringify(translatorMessageInput) }
+    ]
 
     const response = await this.APIClient.chat.completions.create(
       {
         model: this.model,
-        messages: this.messages
+        messages: messages
       },
       {
         timeout: DEFAULT_REQUEST_TIMEOUT
       }
     )
-    this.messages.push(response.choices[0].message)
 
     return response.choices[0].message.content ?? ''
   }
