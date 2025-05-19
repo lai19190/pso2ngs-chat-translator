@@ -60,7 +60,8 @@ export default function ChatWindow({ hovered, messages, transliterationFontClass
         {message.translation}
         {showTransliteration && message.transliteration && (
           <>
-            <br /> |{parseTransliteration(message.transliteration)}|
+            <br />
+            <span className="border-b-1 border-solid">{parseTransliteration(message.transliteration)}</span>
           </>
         )}
       </span>
@@ -77,6 +78,8 @@ export default function ChatWindow({ hovered, messages, transliterationFontClass
   }
 
   function parseTransliteration(transliteration: string): string | JSX.Element | JSX.Element[] {
+    // replace all new lines with <br /> tag
+    transliteration = transliteration.replace(/\n/g, '<br />')
     return parse(transliteration, {
       replace(domNode) {
         if (domNode instanceof Element && domNode.attribs && domNode.name === 'rt') {

@@ -69,7 +69,7 @@ export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: C
         }
       } else if (currentMultiLineMessage) {
         // This is a continuation of a multi-line message
-        currentMultiLineMessage.message += ` ${line}`
+        currentMultiLineMessage.message += `\n${line}`
 
         if (line.endsWith('"')) {
           // End of multi-line message; strip outer quotes

@@ -5,7 +5,8 @@ exports[`Chat Log Tailer 1`] = `
   {
     "group": "PUBLIC",
     "id": "chat-message-189",
-    "message": "Test Multiple Line Message1",
+    "message": "Test
+Multiple Line Message1",
     "name": "TEST1",
   },
   {
@@ -23,7 +24,8 @@ exports[`Chat Log Tailer 1`] = `
   {
     "group": "PUBLIC",
     "id": "chat-message-193",
-    "message": "Test Message4",
+    "message": "Test
+Message4",
     "name": "TEST4",
   },
 ]
