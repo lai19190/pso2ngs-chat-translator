@@ -7,6 +7,7 @@
 ## ユーザインタフェース
 
 ![ユーザインタフェース](/docs/images/user_interface.png)
+![設定](/docs/images/settings.png)
 
 ## 機能
 

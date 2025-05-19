@@ -7,6 +7,7 @@ A multi-language chat translator for the Japanese MMO game **Phantasy Star Onlin
 ## User Interface
 
 ![User Interface](/docs/images/user_interface.png)
+![Settings](/docs/images/settings.png)
 
 ## Features
 

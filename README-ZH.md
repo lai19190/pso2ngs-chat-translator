@@ -7,6 +7,7 @@
 ## 介面
 
 ![介面](/docs/images/user_interface.png)
+![設定](/docs/images/settings.png)
 
 ## 功能特色
 
