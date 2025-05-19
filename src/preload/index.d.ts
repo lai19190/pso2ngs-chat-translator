@@ -11,6 +11,7 @@ declare global {
       setSettings: (settings: Settings) => void
       onNewMessage: (callback: (message: ChatMessage | SystemMessage) => void) => void
       translateInputMessage: (message: string) => Promise<string>
+      checkUpdate: () => Promise<AppUpdateInfo>
     }
   }
 }

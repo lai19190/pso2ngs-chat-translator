@@ -6,6 +6,8 @@
   "Please set OpenAI model or api key": "請設置OpenAI模型和API金鑰",
   "Please set Gemini model or api key": "請設置Gemini模型和API金鑰",
   "Welcome to the PSO2NGS Chat Translator!": "歡迎使用PSO2NGS聊天翻譯工具！",
+  "Version": "版本",
+  "Update available! please download the latest version from": "有可用的更新！請從以下地址下載最新版本",
 
   "General": "一般",
   "Translation": "翻譯",

@@ -2,7 +2,7 @@ import ChatWindow from './components/ChatWindow'
 import InputWindow from './components/InputWindow'
 import TitleBar from './components/TitleBar'
 import { useState, useEffect } from 'react'
-import { MainWindowContent, ChatMessage, Settings, SystemMessage, fontSize } from '../../typings/types'
+import { MainWindowContent, ChatMessage, Settings, SystemMessage, fontSize, AppUpdateInfo } from '../../typings/types'
 import SettingsPage from './components/SettingsPage'
 import i18next from 'i18next'
 
@@ -12,6 +12,7 @@ export default function App(): JSX.Element {
   const [inputValue, setInputValue] = useState<string>('')
   const [messages, setMessages] = useState<(ChatMessage | SystemMessage)[]>()
   const [settings, setSettings] = useState<Settings>()
+  const [appUpdateInfo, setAppUpdateInfo] = useState<AppUpdateInfo | null>(null)
   const { systemFontClassName, transliterationFontClassName } = getFontSize(settings)
 
   let hoveredTimeout: NodeJS.Timeout | null = null
@@ -30,6 +31,13 @@ export default function App(): JSX.Element {
       i18next.changeLanguage(settings.general.locale)
     }
   }, [settings])
+
+  // check app update
+  useEffect(() => {
+    ;(async (): Promise<void> => {
+      setAppUpdateInfo(await window.api.checkUpdate())
+    })()
+  }, [])
 
   // receive new chat message
   window.api.onNewMessage((message: ChatMessage | SystemMessage) => {
@@ -62,6 +70,7 @@ export default function App(): JSX.Element {
             hovered={hovered}
             transliterationFontClassName={transliterationFontClassName}
             showTransliteration={settings?.translation.showTransliteration}
+            appUpdateInfo={appUpdateInfo}
           />
           {showAllWindows && <InputWindow inputValue={inputValue} setInputValue={setInputValue} />}
         </>

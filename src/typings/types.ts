@@ -87,3 +87,8 @@ export type TranslatorMessageInput = {
   targetLanguage: Language
   message: string
 }
+
+export type AppUpdateInfo = {
+  currentVersion: string
+  updateAvailable: boolean
+}

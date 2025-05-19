@@ -4,7 +4,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { ChatServiceController } from './chat-service-controller'
 import { SettingsManager } from './settings-manager'
-import { Settings } from '../typings/types'
+import { AppUpdateInfo, Settings } from '../typings/types'
 import { installExtension, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
 
 // This method will be called when Electron has finished
@@ -52,6 +52,15 @@ app.whenReady().then(async () => {
     const tranlatedMessage = await chatServiceController.translateInputMessage(message)
     clipboard.writeText(tranlatedMessage)
     return tranlatedMessage
+  })
+
+  ipcMain.handle('check-update', async (): Promise<AppUpdateInfo> => {
+    const currentVersion = app.getVersion()
+    const latestVersion = await fetch('https://raw.githubusercontent.com/lai19190/pso2ngs-chat-translator/refs/heads/main/package.json')
+      .then((response) => response.json())
+      .then((data) => data.version as string)
+    const updateAvailable = latestVersion > currentVersion
+    return { currentVersion, updateAvailable }
   })
 })
 

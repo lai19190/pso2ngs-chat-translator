@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-import { ChatMessage, Settings, SystemMessage } from '../typings/types'
+import { AppUpdateInfo, ChatMessage, Settings, SystemMessage } from '../typings/types'
 
 // Custom APIs for renderer
 const api = {
@@ -21,6 +21,9 @@ const api = {
   },
   translateInputMessage: async (message: string): Promise<string> => {
     return await ipcRenderer.invoke('translate-input-message', message)
+  },
+  checkUpdate: async (): Promise<AppUpdateInfo> => {
+    return await ipcRenderer.invoke('check-update')
   }
 }
 

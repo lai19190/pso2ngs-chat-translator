@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { ChatGroup, ChatMessage, SystemMessage } from '../../../typings/types'
+import { AppUpdateInfo, ChatGroup, ChatMessage, SystemMessage } from '../../../typings/types'
 import parse from 'html-react-parser'
 import { DOMNode, Element, domToReact } from 'html-react-parser'
 import { useTranslation } from 'react-i18next'
@@ -17,9 +17,16 @@ export type ChatWindowProps = {
   hovered: boolean
   transliterationFontClassName: string
   showTransliteration?: boolean
+  appUpdateInfo?: AppUpdateInfo | null
 }
 
-export default function ChatWindow({ hovered, messages, transliterationFontClassName, showTransliteration }: ChatWindowProps): JSX.Element {
+export default function ChatWindow({
+  hovered,
+  messages,
+  transliterationFontClassName,
+  showTransliteration,
+  appUpdateInfo
+}: ChatWindowProps): JSX.Element {
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
   const chatWindowDivRef = useRef<HTMLDivElement | null>(null)
   const { t } = useTranslation()
@@ -36,7 +43,21 @@ export default function ChatWindow({ hovered, messages, transliterationFontClass
   return (
     <div ref={chatWindowDivRef} className="w-full flex-grow overflow-y-scroll bg-gray-950/50 p-1 wrap-break-word">
       <p>
-        <span className="block pb-1 text-white">{t('Welcome to the PSO2NGS Chat Translator!')}</span>
+        <span className="block pb-1 text-white">
+          {t('Welcome to the PSO2NGS Chat Translator!')}
+          <br />
+          {t('Version')} {appUpdateInfo?.currentVersion}
+          {appUpdateInfo?.updateAvailable && (
+            <>
+              <br />
+              {t('Update available! please download the latest version from')}
+              <br />
+              <a href="https://github.com/lai19190/pso2ngs-chat-translator/releases" rel="noreferrer" target="_blank" className="underline">
+                https://github.com/lai19190/pso2ngs-chat-translator/releases
+              </a>
+            </>
+          )}
+        </span>
         {messages?.map((message: ChatMessage | SystemMessage) => {
           if (isChatMessage(message)) {
             return renderChatMessage(message)
