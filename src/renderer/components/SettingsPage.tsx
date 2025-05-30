@@ -211,7 +211,11 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
               <div {...tabRowSubtitleStyle}>{t('Local LLM')}</div>
               <div {...tabColStyle}>
                 <label>{t('API Endpoint')}</label>
-                <input className="w-full rounded border px-1" {...register('translation.localLLM.apiEndpoint')} />
+                <input
+                  className="w-full rounded border px-1"
+                  placeholder="http://localhost:11434/v1"
+                  {...register('translation.localLLM.apiEndpoint')}
+                />
               </div>
               <div {...tabColStyle}>
                 <label>{t('Model')}</label>
