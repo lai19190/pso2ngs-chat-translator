@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { AppUpdateInfo, ChatGroup, ChatMessage, SystemMessage } from '../../../typings/types'
+import { AppUpdateInfo, ChatGroup, ChatMessage, SystemMessage } from '../../typings/types'
 import parse from 'html-react-parser'
 import { DOMNode, Element, domToReact } from 'html-react-parser'
 import { useTranslation } from 'react-i18next'

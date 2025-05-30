@@ -2,7 +2,7 @@ import ChatWindow from './components/ChatWindow'
 import InputWindow from './components/InputWindow'
 import TitleBar from './components/TitleBar'
 import { useState, useEffect } from 'react'
-import { MainWindowContent, ChatMessage, Settings, SystemMessage, fontSize, AppUpdateInfo } from '../../typings/types'
+import { MainWindowContent, ChatMessage, Settings, SystemMessage, fontSize, AppUpdateInfo } from '../typings/types'
 import SettingsPage from './components/SettingsPage'
 import i18next from 'i18next'
 

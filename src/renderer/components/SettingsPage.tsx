@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-import { fontSize, Language, Settings, TranslatorType, TransliterationType } from '../../../typings/types'
+import { fontSize, Language, Settings, TranslatorType, TransliterationType } from '../../typings/types'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { MainWindowContent } from '../../../typings/types'
+import { MainWindowContent } from '../../typings/types'
 
 export type TitleBarProps = {
   content: MainWindowContent
