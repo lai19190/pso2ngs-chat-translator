@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-import { fontSize, Language, Settings, TranslatorType, TransliterationType } from '../../typings/types'
+import { fontSize, Language, Locale, Settings, TranslatorType, TransliterationType } from '../../typings/types'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -58,9 +58,9 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
             <label>{t('Language')}</label>
             <div className="flex-grow"></div>
             <select {...register('general.locale', { required: true })}>
-              {(Object.keys(Language) as Array<keyof typeof Language>).map((key) => {
+              {(Object.keys(Locale) as Array<keyof typeof Locale>).map((key) => {
                 return (
-                  <option key={key} value={Language[key]}>
+                  <option key={key} value={Locale[key]}>
                     {t(key)}
                   </option>
                 )
@@ -135,7 +135,7 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
             </select>
           </div>
           <div {...tabRowStyle}>
-            <label>{t('Show Transliteration')}</label>
+            <label>{t('Show Japanese Transliteration')}</label>
             <div className="flex-grow"></div>
             <label className="inline-flex cursor-pointer items-center">
               <input

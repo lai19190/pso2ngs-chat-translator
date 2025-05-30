@@ -7,7 +7,7 @@ const resources = {
   ja: {
     translation: jaTranslation
   },
-  'zh-TW': {
+  zh: {
     translation: zhTranslation
   }
 }

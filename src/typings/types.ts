@@ -31,7 +31,7 @@ export enum ChatGroup {
 
 export type Settings = {
   general: {
-    locale: Language
+    locale: Locale
     fontSize: fontSize
     showChatWindowOnly: boolean
   }
@@ -69,10 +69,26 @@ export enum fontSize {
   Large = 'Large'
 }
 
-export enum Language {
+export enum Locale {
   English = 'en',
   Japanese = 'ja',
   Chinese = 'zh-TW'
+}
+
+export enum Language {
+  English = 'en',
+  Japanese = 'ja',
+  TraditionalChinese = 'zh-TW',
+  SimplifiedChinese = 'zh-CN',
+  Spanish = 'es',
+  Portuguese = 'pt',
+  Korean = 'ko',
+  French = 'fr',
+  German = 'de',
+  Italian = 'it',
+  Russian = 'ru',
+  Indonesian = 'id',
+  Tagalog = 'tl'
 }
 
 export enum TranslatorType {

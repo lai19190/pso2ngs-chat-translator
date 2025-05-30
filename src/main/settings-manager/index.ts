@@ -1,6 +1,6 @@
 import { app } from 'electron'
 import Store from 'electron-store'
-import { fontSize, Language, Settings, TranslatorType, TransliterationType } from '../../typings/types'
+import { fontSize, Language, Locale, Settings, TranslatorType, TransliterationType } from '../../typings/types'
 
 export class SettingsManager {
   private settings: Store<Settings>
@@ -20,7 +20,7 @@ export class SettingsManager {
         translation: {
           translator: TranslatorType.GoogleTranslate,
           sourceLanguage: this.getDefaultSourceLanguage(),
-          destinationLanguage: this.getDefaultLocale(),
+          destinationLanguage: this.getDefaultDestinationLanguage(),
           showTransliteration: true,
           transliterationType: TransliterationType.Okurigana,
           openAI: {},
@@ -43,17 +43,17 @@ export class SettingsManager {
     this.settings.set(settings)
   }
 
-  getDefaultLocale(): Language {
+  getDefaultLocale(): Locale {
     if (this.locale.startsWith('en')) {
-      return Language.English
+      return Locale.English
     }
     if (this.locale === 'ja') {
-      return Language.Japanese
+      return Locale.Japanese
     }
     if (this.locale.startsWith('zh')) {
-      return Language.Chinese
+      return Locale.Chinese
     }
-    return Language.English
+    return Locale.English
   }
 
   getDefaultSourceLanguage(): Language {
@@ -61,5 +61,21 @@ export class SettingsManager {
       return Language.English
     }
     return Language.Japanese
+  }
+
+  getDefaultDestinationLanguage(): Language {
+    if (this.locale.startsWith('en')) {
+      return Language.English
+    }
+    if (this.locale === 'ja') {
+      return Language.Japanese
+    }
+    if (this.locale === 'zh-CN') {
+      return Language.SimplifiedChinese
+    }
+    if (this.locale.startsWith('zh')) {
+      return Language.TraditionalChinese
+    }
+    return Language.English
   }
 }
