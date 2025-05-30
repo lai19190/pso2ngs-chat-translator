@@ -5,10 +5,22 @@ import { SanitizeChatMessage } from './chat-santizer'
 import EventEmitter from 'events'
 import { app } from 'electron'
 import { globSync } from 'glob'
+import { CronJob } from 'cron'
 
 export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: ChatMessage] }> {
   private logFilePath?: string
   private chatRegex = /(?<datetime>.+)\t(?<id>.+)\t(?<group>.+)\t(?<playerID>.+)\t(?<playerName>.+)\t(?<message>.+)/
+  // at start, periodically check if the log file is being written to
+  // since the game may write to a new log file
+  private restartCronJob = new CronJob(
+    '*/30 * * * * *', // every 30 seconds
+    () => {
+      this.stopTailing()
+      this.startTailing()
+    },
+    null,
+    true
+  )
 
   startTailing(): void {
     const logFolderPath = `${app.getPath('documents')}/SEGA/PHANTASYSTARONLINE2/log_ngs`
@@ -40,6 +52,11 @@ export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: C
   }
 
   processChatLog(lines: string[]): ChatMessage[] {
+    // new chat Log detected, stop the restart cron job
+    if (this.restartCronJob.isActive) {
+      this.restartCronJob.stop()
+    }
+
     let chatMessages: ChatMessage[] = []
     let currentMultiLineMessage: ChatMessage | undefined
 

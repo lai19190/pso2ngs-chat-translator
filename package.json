@@ -29,6 +29,7 @@
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^4.0.0",
     "@google/genai": "^0.7.0",
+    "cron": "^4.3.0",
     "electron-store": "^8.2.0",
     "franc": "^6.2.0",
     "glob": "^11.0.2",

@@ -2,7 +2,7 @@
 
 [中文](./README-ZH.md) | [日本語](./README-JA.md)
 
-A multi-language chat translator for the Japanese MMO game **Phantasy Star Online 2: New Genesis (PSO2NGS)**.
+A multi-language chat translator for the Japanese MMORPG **Phantasy Star Online 2: New Genesis (PSO2NGS)**.
 
 ## User Interface
 
