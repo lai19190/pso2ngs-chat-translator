@@ -32,6 +32,8 @@ export enum ChatGroup {
 export type Settings = {
   general: {
     locale: Locale
+    gameVersion: GameVersion
+    gamePlatform: GamePlatform
     fontSize: fontSize
     showChatWindowOnly: boolean
   }
@@ -56,6 +58,18 @@ export type Settings = {
     }
   }
   window: Partial<Rectangle>
+}
+
+export enum GameVersion {
+  PSO2NGS = 'PSO2NGS',
+  PSO2 = 'PSO2'
+}
+
+export enum GamePlatform {
+  JP = 'JP',
+  GLOBAL_STEAM = 'Steam',
+  GLOBAL_EPIC = 'Epic Games Store',
+  GLOBAL_MICROSOFT = 'Microsoft Store'
 }
 
 export enum TransliterationType {

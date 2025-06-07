@@ -1,8 +1,7 @@
 import { ChatLogTailer } from './chat-log-tailer'
 
 test('Chat Log Tailer', async () => {
-  const chatLogTailer = new ChatLogTailer()
-  const chatMessages = chatLogTailer.processChatLog([
+  const chatMessages = ChatLogTailer.processChatLog([
     `2025-04-25T00:39:00	189	PUBLIC	14219799	TEST1	"/a Test`,
     `Multiple Line Message1"`,
     `2025-04-25T00:41:00	191	PARTY	13182309	TEST2	"Test Message2"`,

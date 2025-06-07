@@ -12,9 +12,9 @@ import { LocalLLMTranslator } from './translator/localllm-translator'
 
 export class ChatServiceController {
   private mainWindow: BrowserWindow
-  private chatLogTailer: ChatLogTailer
 
   private settings?: Settings
+  private chatLogTailer?: ChatLogTailer
   private translator?: Translator
 
   private chatHistory: ChatMessage[] = []
@@ -24,15 +24,15 @@ export class ChatServiceController {
   constructor(mainWindow: BrowserWindow) {
     this.mainWindow = mainWindow
     SetupKuroshiro()
-    this.chatLogTailer = new ChatLogTailer()
-    this.chatLogTailer.on('new-message', async (chatMessage: ChatMessage) => {
-      await this.queue(() => this.notifyNewChatMessage(chatMessage))
-    })
   }
 
   async start(settings: Settings): Promise<void> {
     try {
       this.settings = settings
+      this.chatLogTailer = new ChatLogTailer(settings)
+      this.chatLogTailer.on('new-message', async (chatMessage: ChatMessage) => {
+        await this.queue(() => this.notifyNewChatMessage(chatMessage))
+      })
       switch (settings.translation.translator) {
         case TranslatorType.Gemini:
           this.translator = new GeminiTranslator(settings, this.chatHistory)
@@ -57,7 +57,7 @@ export class ChatServiceController {
   }
 
   stop(): void {
-    this.chatLogTailer.stopTailing()
+    this.chatLogTailer?.stopTailing()
   }
 
   async restart(settings: Settings): Promise<void> {

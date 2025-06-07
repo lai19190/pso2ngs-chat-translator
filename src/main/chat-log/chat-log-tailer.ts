@@ -1,6 +1,6 @@
 import * as readline from 'readline'
 import * as fs from 'fs'
-import { ChatGroup, ChatMessage } from '../../typings/types'
+import { ChatGroup, ChatMessage, GamePlatform, GameVersion, Settings } from '../../typings/types'
 import { SanitizeChatMessage } from './chat-santizer'
 import EventEmitter from 'events'
 import { app } from 'electron'
@@ -8,8 +8,9 @@ import { CronJob } from 'cron'
 import moment from 'moment'
 
 export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: ChatMessage] }> {
+  private settings: Settings
   private logFilePath?: string
-  private chatRegex = /(?<datetime>.+)\t(?<id>.+)\t(?<group>.+)\t(?<playerID>.+)\t(?<playerName>.+)\t(?<message>.+)/
+  private static chatRegex = /(?<datetime>.+)\t(?<id>.+)\t(?<group>.+)\t(?<playerID>.+)\t(?<playerName>.+)\t(?<message>.+)/
   // restart the tailing job every day at 00:00 UTC
   private restartCronJob = new CronJob(
     '0 0 0 * * *', // every 00:00 UTC
@@ -21,6 +22,11 @@ export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: C
     true,
     'UTC'
   )
+
+  constructor(settings: Settings) {
+    super()
+    this.settings = settings
+  }
 
   startTailing(): void {
     const documentsPath = app.getPath('documents')
@@ -41,7 +47,7 @@ export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: C
         for await (const line of rl) {
           lines.push(line)
         }
-        const chatMessages = await this.processChatLog(lines)
+        const chatMessages = await ChatLogTailer.processChatLog(lines)
         for (const chatMessage of chatMessages) {
           this.emit('new-message', chatMessage)
         }
@@ -49,7 +55,7 @@ export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: C
     })
   }
 
-  processChatLog(lines: string[]): ChatMessage[] {
+  static processChatLog(lines: string[]): ChatMessage[] {
     let chatMessages: ChatMessage[] = []
     let currentMultiLineMessage: ChatMessage | undefined
 
@@ -97,6 +103,32 @@ export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: C
     chatMessages = chatMessages.filter((chatMessage) => chatMessage.message !== '')
 
     return chatMessages
+  }
+
+  getGamePlatformFolder(settings: Settings): string {
+    switch (settings.general.gamePlatform) {
+      case GamePlatform.JP:
+        return 'PHANTASYSTARONLINE2'
+      case GamePlatform.GLOBAL_STEAM:
+        return 'PHANTASYSTARONLINE2_NA_STEAM'
+      case GamePlatform.GLOBAL_EPIC:
+        return 'PHANTASYSTARONLINE2_NA_EPICGAMES'
+      case GamePlatform.GLOBAL_MICROSOFT:
+        return 'PHANTASYSTARONLINE2_NA'
+      default:
+        throw new Error(`Unsupported game platform: ${settings.general.gamePlatform}`)
+    }
+  }
+
+  getGameVersionFolder(settings: Settings): string {
+    switch (settings.general.gameVersion) {
+      case GameVersion.PSO2NGS:
+        return 'log_ngs'
+      case GameVersion.PSO2:
+        return 'log'
+      default:
+        throw new Error(`Unsupported game version: ${settings.general.gameVersion}`)
+    }
   }
 
   // Stop tailing the log file

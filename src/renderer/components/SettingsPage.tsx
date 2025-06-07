@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-import { fontSize, Language, Locale, Settings, TranslatorType, TransliterationType } from '../../typings/types'
+import { fontSize, GamePlatform, GameVersion, Language, Locale, Settings, TranslatorType, TransliterationType } from '../../typings/types'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -62,6 +62,32 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
                 return (
                   <option key={key} value={Locale[key]}>
                     {t(key)}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+          <div {...tabRowStyle}>
+            <label>{t('Game Version')}</label>
+            <div className="flex-grow"></div>
+            <select {...register('general.gameVersion', { required: true })}>
+              {(Object.keys(GameVersion) as Array<keyof typeof GameVersion>).map((key) => {
+                return (
+                  <option key={key} value={GameVersion[key]}>
+                    {GameVersion[key]}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+          <div {...tabRowStyle}>
+            <label>{t('Game Platform')}</label>
+            <div className="flex-grow"></div>
+            <select {...register('general.gamePlatform', { required: true })}>
+              {(Object.keys(GamePlatform) as Array<keyof typeof GamePlatform>).map((key) => {
+                return (
+                  <option key={key} value={GamePlatform[key]}>
+                    {GamePlatform[key]}
                   </option>
                 )
               })}

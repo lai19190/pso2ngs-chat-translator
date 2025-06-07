@@ -1,6 +1,6 @@
 import { app } from 'electron'
 import Store from 'electron-store'
-import { fontSize, Language, Locale, Settings, TranslatorType, TransliterationType } from '../../typings/types'
+import { fontSize, GamePlatform, GameVersion, Language, Locale, Settings, TranslatorType, TransliterationType } from '../../typings/types'
 
 export class SettingsManager {
   private settings: Store<Settings>
@@ -14,6 +14,8 @@ export class SettingsManager {
       defaults: {
         general: {
           locale: this.getDefaultLocale(),
+          gameVersion: GameVersion.PSO2NGS,
+          gamePlatform: GamePlatform.JP,
           fontSize: fontSize.Medium,
           showChatWindowOnly: false
         },
