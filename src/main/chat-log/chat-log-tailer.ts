@@ -4,32 +4,30 @@ import { ChatGroup, ChatMessage } from '../../typings/types'
 import { SanitizeChatMessage } from './chat-santizer'
 import EventEmitter from 'events'
 import { app } from 'electron'
-import { globSync } from 'glob'
 import { CronJob } from 'cron'
+import moment from 'moment'
 
 export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: ChatMessage] }> {
   private logFilePath?: string
   private chatRegex = /(?<datetime>.+)\t(?<id>.+)\t(?<group>.+)\t(?<playerID>.+)\t(?<playerName>.+)\t(?<message>.+)/
-  // at start, periodically check if the log file is being written to
-  // since the game may write to a new log file
+  // restart the tailing job every day at 00:00 UTC
   private restartCronJob = new CronJob(
-    '*/30 * * * * *', // every 30 seconds
+    '0 0 0 * * *', // every 00:00 UTC
     () => {
       this.stopTailing()
       this.startTailing()
     },
     null,
-    true
+    true,
+    'UTC'
   )
 
   startTailing(): void {
-    const logFolderPath = `${app.getPath('documents')}/SEGA/PHANTASYSTARONLINE2/log_ngs`
-    // find the latest chat log file of current year
-    const currentYear = new Date().getFullYear()
-    const logFilePath = globSync(`ChatLog${currentYear}*.txt`, { stat: true, withFileTypes: true, cwd: logFolderPath })
-      .sort((a, b) => a.mtimeMs! - b.mtimeMs!)
-      .map((path) => path.fullpath())
-      .at(-1)!
+    const documentsPath = app.getPath('documents')
+    const gamePlatformFolder = this.getGamePlatformFolder(this.settings)
+    const gameVersionFolder = this.getGameVersionFolder(this.settings)
+    const chatLogName = `ChatLog${moment().utc().format('YYYYMMDD')}_00.txt`
+    const logFilePath = `${documentsPath}/SEGA/${gamePlatformFolder}/${gameVersionFolder}/${chatLogName}`
     this.logFilePath = logFilePath
     // watch the file for changes
     fs.watchFile(logFilePath, { interval: 500 }, async (curr, prev) => {
@@ -52,11 +50,6 @@ export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: C
   }
 
   processChatLog(lines: string[]): ChatMessage[] {
-    // new chat Log detected, stop the restart cron job
-    if (this.restartCronJob.isActive) {
-      this.restartCronJob.stop()
-    }
-
     let chatMessages: ChatMessage[] = []
     let currentMultiLineMessage: ChatMessage | undefined
 

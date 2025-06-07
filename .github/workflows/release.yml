@@ -44,3 +44,4 @@ jobs:
         if: github.ref_type == 'tag'
         with:
           files: pso2ngs-chat-translator.zip
+          generate_release_notes: true

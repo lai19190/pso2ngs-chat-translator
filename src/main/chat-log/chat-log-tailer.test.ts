@@ -12,5 +12,4 @@ test('Chat Log Tailer', async () => {
     `2025-04-25T00:41:00	194	PUBLIC	14219794	TEST5	"/la PRpose11 rha lsign`
   ])
   expect(chatMessages).toMatchSnapshot()
-  chatLogTailer.stopTailing()
 })
