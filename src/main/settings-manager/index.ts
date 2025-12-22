@@ -17,7 +17,8 @@ export class SettingsManager {
           gameVersion: GameVersion.PSO2NGS,
           gamePlatform: GamePlatform.JP,
           fontSize: fontSize.Medium,
-          showChatWindowOnly: false
+          showChatWindowOnly: false,
+          showTimestamp: true
         },
         translation: {
           translator: TranslatorType.GoogleTranslate,
@@ -27,7 +28,8 @@ export class SettingsManager {
           transliterationType: TransliterationType.Okurigana,
           openAI: {},
           gemini: {},
-          localLLM: {}
+          localLLM: {},
+          xai: {}
         },
         window: {
           width: 330,

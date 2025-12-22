@@ -17,6 +17,7 @@ export type ChatWindowProps = {
   hovered: boolean
   transliterationFontClassName: string
   showTransliteration?: boolean
+  showTimestamp?: boolean
   appUpdateInfo?: AppUpdateInfo | null
 }
 
@@ -25,6 +26,7 @@ export default function ChatWindow({
   messages,
   transliterationFontClassName,
   showTransliteration,
+  showTimestamp,
   appUpdateInfo
 }: ChatWindowProps): JSX.Element {
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
@@ -75,9 +77,10 @@ export default function ChatWindow({
   }
 
   function renderChatMessage(message: ChatMessage): JSX.Element {
+    const formattedTime = showTimestamp ? formatTimestamp(message.timestamp) : null
     return (
       <span key={message.id} style={{ color: chatColorMap.get(message.group) }} className="block pb-1">
-        [{t(`ChatGroup.${message.group}`)}] [{message.name}] <br />
+        {formattedTime && `[${formattedTime}] `}[{t(`ChatGroup.${message.group}`)}] [{message.name}] <br />
         {message.translation}
         {showTransliteration && message.transliteration && (
           <>
@@ -87,6 +90,14 @@ export default function ChatWindow({
         )}
       </span>
     )
+  }
+
+  function formatTimestamp(timestamp: string): string {
+    // Parse the timestamp and format it as [HH:MM]
+    const date = new Date(timestamp)
+    const hours = date.getHours().toString().padStart(2, '0')
+    const minutes = date.getMinutes().toString().padStart(2, '0')
+    return `${hours}:${minutes}`
   }
 
   function renderSystemMessage(systemMessage: SystemMessage): JSX.Element {

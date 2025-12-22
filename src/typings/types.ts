@@ -10,6 +10,7 @@ export type ChatMessage = {
   group: ChatGroup
   name: string
   message: string
+  timestamp: string
   translation?: string
   transliteration?: string
 }
@@ -35,6 +36,7 @@ export type Settings = {
     gamePlatform: GamePlatform
     fontSize: fontSize
     showChatWindowOnly: boolean
+    showTimestamp: boolean
   }
   translation: {
     translator: TranslatorType
@@ -52,6 +54,10 @@ export type Settings = {
     }
     localLLM: {
       apiEndpoint?: string
+      model?: string
+      apiKey?: string
+    }
+    xai: {
       model?: string
       apiKey?: string
     }
@@ -108,7 +114,8 @@ export enum TranslatorType {
   OpenAI = 'OpenAI',
   Gemini = 'Gemini',
   GoogleTranslate = 'GoogleTranslate',
-  LocalLLM = 'LocalLLM'
+  LocalLLM = 'LocalLLM',
+  XAI = 'XAI'
 }
 
 export type TranslatorMessageInput = {

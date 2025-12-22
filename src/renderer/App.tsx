@@ -73,6 +73,7 @@ export default function App(): JSX.Element {
             hovered={hovered}
             transliterationFontClassName={transliterationFontClassName}
             showTransliteration={settings?.translation.showTransliteration}
+            showTimestamp={settings?.general.showTimestamp}
             appUpdateInfo={appUpdateInfo}
           />
           {showAllWindows && <InputWindow inputValue={inputValue} setInputValue={setInputValue} />}

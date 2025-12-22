@@ -63,7 +63,7 @@ export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: C
       const match = line.match(this.chatRegex)
 
       if (match?.groups) {
-        const { id, group, playerName, message } = match.groups
+        const { datetime, id, group, playerName, message } = match.groups
 
         if (currentMultiLineMessage) {
           // Previous line wasn't actually a multi-line start, push it now
@@ -75,7 +75,8 @@ export class ChatLogTailer extends EventEmitter<{ 'new-message': [chatMessage: C
           id: `chat-message-${id}`,
           group: ChatGroup[group as keyof typeof ChatGroup],
           name: playerName,
-          message: message
+          message: message,
+          timestamp: datetime
         }
 
         if (message.startsWith('"')) {

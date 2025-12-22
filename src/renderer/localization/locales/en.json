@@ -48,7 +48,8 @@
       "gameVersion": "Game Version",
       "gamePlatform": "Game Platform",
       "fontSize": "Font Size",
-      "showChatWindowOnly": "Show Chat Window Only"
+      "showChatWindowOnly": "Show Chat Window Only",
+      "showTimestamp": "Show Timestamp"
     },
     "Translation": {
       "translator": "Translator",

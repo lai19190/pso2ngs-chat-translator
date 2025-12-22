@@ -48,7 +48,8 @@
       "gameVersion": "遊戲版本",
       "gamePlatform": "遊戲平台",
       "fontSize": "字體大小",
-      "showChatWindowOnly": "僅顯示聊天視窗"
+      "showChatWindowOnly": "僅顯示聊天視窗",
+      "showTimestamp": "顯示時間戳"
     },
     "Translation": {
       "translator": "翻譯器",
