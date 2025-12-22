@@ -1,5 +1,4 @@
 import { Rectangle } from 'electron'
-import OpenAI from 'openai'
 
 export enum MainWindowContent {
   TRANSLATION = 'TRANSLATION',
@@ -44,7 +43,7 @@ export type Settings = {
     showTransliteration: boolean
     transliterationType: TransliterationType
     openAI: {
-      model?: OpenAI.ChatModel
+      model?: string
       apiKey?: string
     }
     gemini: {
