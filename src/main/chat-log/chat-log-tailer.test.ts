@@ -6,9 +6,9 @@ test('Chat Log Tailer', async () => {
     `Multiple Line Message1"`,
     `2025-04-25T00:41:00	191	PARTY	13182309	TEST2	"Test Message2"`,
     `2025-04-25T00:59:00	192	GUILD	11032520	TEST3	Test Message3`,
-    `2025-04-25T00:40:00	193	PUBLIC	14219793	TEST4	"/a Test`,
+    `2025-04-25T01:00:00	193	PUBLIC	14219793	TEST4	"/a Test`,
     `Message4"`,
-    `2025-04-25T00:41:00	194	PUBLIC	14219794	TEST5	"/la PRpose11 rha lsign`
+    `2025-04-25T01:01:00	194	PUBLIC	14219794	TEST5	"/la PRpose11 rha lsign`
   ])
   expect(chatMessages).toMatchSnapshot()
 })

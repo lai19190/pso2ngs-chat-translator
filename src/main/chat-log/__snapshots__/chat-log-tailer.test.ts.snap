@@ -8,18 +8,21 @@ exports[`Chat Log Tailer 1`] = `
     "message": "Test
 Multiple Line Message1",
     "name": "TEST1",
+    "timestamp": "2025-04-25T00:39:00",
   },
   {
     "group": "PARTY",
     "id": "chat-message-191",
     "message": ""Test Message2"",
     "name": "TEST2",
+    "timestamp": "2025-04-25T00:41:00",
   },
   {
     "group": "GUILD",
     "id": "chat-message-192",
     "message": "Test Message3",
     "name": "TEST3",
+    "timestamp": "2025-04-25T00:59:00",
   },
   {
     "group": "PUBLIC",
@@ -27,6 +30,7 @@ Multiple Line Message1",
     "message": "Test
 Message4",
     "name": "TEST4",
+    "timestamp": "2025-04-25T01:00:00",
   },
 ]
 `;
