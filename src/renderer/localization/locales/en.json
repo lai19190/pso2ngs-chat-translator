@@ -30,6 +30,12 @@
       "apiEndpoint": "API Endpoint",
       "model": "Model",
       "apiKey": "API Key"
+    },
+    "XAI": {
+      "name": "Grok",
+      "errorMissingConfig": "Please set Grok model and API key",
+      "model": "Model",
+      "apiKey": "API Key"
     }
   },
   "Settings": {

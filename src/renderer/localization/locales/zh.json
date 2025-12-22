@@ -30,6 +30,12 @@
       "apiEndpoint": "API 地址",
       "model": "模型",
       "apiKey": "API 金鑰"
+    },
+    "XAI": {
+      "name": "Grok",
+      "errorMissingConfig": "請設置Grok模型和API金鑰",
+      "model": "模型",
+      "apiKey": "API 金鑰"
     }
   },
   "Settings": {

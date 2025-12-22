@@ -35,6 +35,7 @@ export class ChatServiceController {
         case TranslatorType.Gemini:
         case TranslatorType.OpenAI:
         case TranslatorType.LocalLLM:
+        case TranslatorType.XAI:
           this.translator = new LangChainTranslator(settings, this.chatHistory)
           break
         case TranslatorType.GoogleTranslate:

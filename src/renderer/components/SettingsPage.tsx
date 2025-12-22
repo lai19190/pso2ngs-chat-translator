@@ -20,6 +20,7 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
 
   const geminiModelIDs = ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-1.5-pro', 'gemini-1.5-flash']
   const openAIModelIDs = ['gpt-4.1', 'gpt-4.1-nano', 'gpt-4o-mini', 'o4-mini', 'o3']
+  const xaiModelIDs = ['grok-4-1-fast-non-reasoning', 'grok-4-fast-non-reasoning']
 
   // save settings for each change
   useEffect(() => {
@@ -250,6 +251,28 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
               <div {...tabColStyle}>
                 <label>{t('LLM.LocalLLM.apiKey')}</label>
                 <input className="w-full rounded border px-1" {...register('translation.localLLM.apiKey')} />
+              </div>
+            </>
+          )}
+          {settings?.translation.translator === TranslatorType.XAI && (
+            <>
+              <div {...tabRowSubtitleStyle}>{t('LLM.XAI.name')}</div>
+              <div {...tabColStyle}>
+                <label>{t('LLM.XAI.model')}</label>
+                <input className="w-full rounded border px-1" list="xai-model" {...register('translation.xai.model')} />
+                <datalist id="xai-model">
+                  {xaiModelIDs.map((model) => {
+                    return (
+                      <option key={model} value={model}>
+                        {model}
+                      </option>
+                    )
+                  })}
+                </datalist>
+              </div>
+              <div {...tabColStyle}>
+                <label>{t('LLM.XAI.apiKey')}</label>
+                <input className="w-full rounded border px-1" {...register('translation.xai.apiKey')} />
               </div>
             </>
           )}

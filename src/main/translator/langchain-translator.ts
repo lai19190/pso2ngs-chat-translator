@@ -61,6 +61,21 @@ export class LangChainTranslator implements Translator {
         })
       }
 
+      case TranslatorType.XAI: {
+        const xaiConfig = settings.translation.xai
+        if (!xaiConfig.apiKey || !xaiConfig.model) {
+          throw new Error('LLM.XAI.errorMissingConfig')
+        }
+        return new ChatOpenAI({
+          configuration: {
+            baseURL: 'https://api.x.ai/v1'
+          },
+          apiKey: xaiConfig.apiKey,
+          model: xaiConfig.model,
+          timeout: DEFAULT_REQUEST_TIMEOUT
+        })
+      }
+
       default:
         throw new Error(`Unsupported translator type for LangChain: ${translatorType}`)
     }

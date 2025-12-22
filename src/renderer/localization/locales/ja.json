@@ -30,6 +30,12 @@
       "apiEndpoint": "APIエンドポイント",
       "model": "モデル",
       "apiKey": "APIキー"
+    },
+    "XAI": {
+      "name": "Grok",
+      "errorMissingConfig": "GrokのモデルまたはAPIキーが入力してください",
+      "model": "モデル",
+      "apiKey": "APIキー"
     }
   },
   "Settings": {
