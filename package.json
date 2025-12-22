@@ -1,5 +1,6 @@
 {
   "name": "pso2ngs-chat-translator",
+  "productName": "PSO2NGS Chat Translator",
   "version": "1.0.8",
   "description": "A multi-language translator for PSO2NGS",
   "main": "./out/main/index.js",

@@ -14,6 +14,7 @@ describe('Chat Log Santizer', () => {
     expect(SanitizeChatMessage(`/a /mn17 /fla greet /ci2 2 よろしくね`)).toBe('よろしくね')
 
     expect(SanitizeChatMessage(`/mla banzai ha claw2 s1`)).toBe('')
+    expect(SanitizeChatMessage(`/la dance20 ss0.35`)).toBe('')
     expect(SanitizeChatMessage(`/a /ci1 3 /mla wave ぶち殺しタイム終了～♪\nお疲れ様でした♪`)).toBe('ぶち殺しタイム終了～♪\nお疲れ様でした♪')
 
     expect(SanitizeChatMessage(`/cla khorshidakhtar rha chopchop /ci1 1 /toge /mn16 がおー`)).toBe('がおー')
@@ -67,6 +68,7 @@ describe('Chat Log Santizer', () => {
   })
   test('ci', async () => {
     expect(SanitizeChatMessage(`/ci9`)).toBe('')
+    expect(SanitizeChatMessage(`/ci10`)).toBe('')
     expect(SanitizeChatMessage(`/ci3 1`)).toBe('')
     expect(SanitizeChatMessage(`/ci3 1 ｳｫｵｵｵｵｵｵｱｱｱｱｱｱｱ`)).toBe('ｳｫｵｵｵｵｵｵｱｱｱｱｱｱｱ')
     expect(SanitizeChatMessage(`/ci9 nw s60`)).toBe('')

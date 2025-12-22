@@ -1,7 +1,7 @@
 const regexs: Record<string, RegExp> = {
   // main commands start with /
   stampRegex: /^\/(st|stamp) \d+/,
-  laRegex: /^\/(la|fla|mla|cla) \S+(?: s\d+\.\d+)?(?: (ha|lha|rha) \w+)?/,
+  laRegex: /^\/(la|fla|mla|cla) \S+(?: (s|ss)\d+\.\d+)?(?: (ha|lha|rha) \w+)?/,
   cfRegex: /^\/cf/,
   fcRegex: /^\/(face|fc)\d?/,
   ceRegex: /^\/ce(?:all|\d)?/,
@@ -10,7 +10,7 @@ const regexs: Record<string, RegExp> = {
   mfRegex: /^\/(mf|myfashion)\d+(?: all)?/,
   mpalRegex: /^\/(mpal|mainpalette)\d+/,
   spalRegex: /^\/(spal|sainpalette)\d+/,
-  ciRegex: /^\/ci\d(?: (?:\d)?)?/,
+  ciRegex: /^\/ci\d{1,2}(?: (?:\d)?)?/,
   togeRegex: /^\/toge/,
   moyaRegex: /^\/moya/,
   photoRoomRegex: /^\/pr \w+ \d+/,
