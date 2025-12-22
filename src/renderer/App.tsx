@@ -40,14 +40,17 @@ export default function App(): JSX.Element {
   }, [])
 
   // receive new chat message
-  window.api.onNewMessage((message: ChatMessage | SystemMessage) => {
-    const newMessages = [...(messages ?? []), message]
-    // limit array size to 100 for performance
-    if (newMessages.length > 100) {
-      newMessages.shift()
-    }
-    setMessages(newMessages)
-  })
+  useEffect(() => {
+    const cleanup = window.api.onNewMessage((message: ChatMessage | SystemMessage) => {
+      const newMessages = [...(messages ?? []), message]
+      // limit array size to 100 for performance
+      if (newMessages.length > 100) {
+        newMessages.shift()
+      }
+      setMessages(newMessages)
+    })
+    return cleanup
+  }, [messages])
 
   const onTranslationWindow = content === MainWindowContent.TRANSLATION
   const onSettingsWindow = content === MainWindowContent.SETTINGS

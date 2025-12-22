@@ -9,7 +9,7 @@ declare global {
       closeWindow: () => void
       getSettings: () => Promise<Settings>
       setSettings: (settings: Settings) => void
-      onNewMessage: (callback: (message: ChatMessage | SystemMessage) => void) => void
+      onNewMessage: (callback: (message: ChatMessage | SystemMessage) => void) => () => void
       translateInputMessage: (message: string) => Promise<string>
       checkUpdate: () => Promise<AppUpdateInfo>
     }

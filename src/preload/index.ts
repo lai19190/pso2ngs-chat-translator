@@ -16,8 +16,15 @@ const api = {
   setSettings: (settings: Settings): void => {
     ipcRenderer.send('set-settings', settings)
   },
-  onNewMessage: (callback: (message: ChatMessage | SystemMessage) => void): void => {
-    ipcRenderer.on('new-message', (_event, message) => callback(message))
+  onNewMessage: (callback: (message: ChatMessage | SystemMessage) => void): (() => void) => {
+    const handler = (_event: unknown, message: ChatMessage | SystemMessage): void => {
+      callback(message)
+    }
+    ipcRenderer.on('new-message', handler)
+    // Return cleanup function
+    return () => {
+      ipcRenderer.removeListener('new-message', handler)
+    }
   },
   translateInputMessage: async (message: string): Promise<string> => {
     return await ipcRenderer.invoke('translate-input-message', message)
