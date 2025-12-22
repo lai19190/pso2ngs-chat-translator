@@ -2,13 +2,11 @@ import { franc } from 'franc'
 import { ChatMessage, Settings, TranslatorType, SystemMessage } from '../typings/types'
 import { ChatLogTailer } from './chat-log/chat-log-tailer'
 import { BrowserWindow } from 'electron'
-import { GeminiTranslator } from './translator/gemini-translator'
 import { Translator } from '../typings/interface'
 import { kuroshiro, SetupKuroshiro } from './translator/kuroshiro'
 import { GoogleTranslator } from './translator/google-translator'
-import { OpenAITranslator } from './translator/openai-translator'
+import { LangChainTranslator } from './translator/langchain-translator'
 import pLimit from 'p-limit'
-import { LocalLLMTranslator } from './translator/localllm-translator'
 
 export class ChatServiceController {
   private mainWindow: BrowserWindow
@@ -35,13 +33,9 @@ export class ChatServiceController {
       })
       switch (settings.translation.translator) {
         case TranslatorType.Gemini:
-          this.translator = new GeminiTranslator(settings, this.chatHistory)
-          break
         case TranslatorType.OpenAI:
-          this.translator = new OpenAITranslator(settings, this.chatHistory)
-          break
         case TranslatorType.LocalLLM:
-          this.translator = new LocalLLMTranslator(settings, this.chatHistory)
+          this.translator = new LangChainTranslator(settings, this.chatHistory)
           break
         case TranslatorType.GoogleTranslate:
           this.translator = new GoogleTranslator(settings)
