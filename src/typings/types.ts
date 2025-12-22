@@ -108,8 +108,8 @@ export enum Language {
 export enum TranslatorType {
   OpenAI = 'OpenAI',
   Gemini = 'Gemini',
-  GoogleTranslate = 'Google Translate',
-  LocalLLM = 'Local LLM'
+  GoogleTranslate = 'GoogleTranslate',
+  LocalLLM = 'LocalLLM'
 }
 
 export type TranslatorMessageInput = {

@@ -14,7 +14,7 @@ export class GeminiTranslator implements Translator {
   constructor(settings: Settings, chatHistory: ChatMessage[]) {
     const geminiConfig = settings.translation.gemini
     if (!geminiConfig.apiKey || !geminiConfig.model) {
-      throw new Error('Please set Gemini model or api key')
+      throw new Error('LLM.Gemini.errorMissingConfig')
     }
     this.sourceLanguage = settings.translation.sourceLanguage
     this.destinationLanguage = settings.translation.destinationLanguage

@@ -44,13 +44,13 @@ export default function ChatWindow({
     <div ref={chatWindowDivRef} className="w-full flex-grow overflow-y-scroll bg-gray-950/50 p-1 wrap-break-word">
       <p>
         <span className="block pb-1 text-white">
-          {t('Welcome to the PSO2NGS Chat Translator!')}
+          {t('Messages.welcomeMessage')}
           <br />
-          {t('Version')} {appUpdateInfo?.currentVersion}
+          {t('Messages.version')} {appUpdateInfo?.currentVersion}
           {appUpdateInfo?.updateAvailable && (
             <>
               <br />
-              {t('Update available! please download the latest version from')}
+              {t('Messages.updateAvailable')}
               <br />
               <a href="https://github.com/lai19190/pso2ngs-chat-translator/releases" rel="noreferrer" target="_blank" className="underline">
                 https://github.com/lai19190/pso2ngs-chat-translator/releases
@@ -77,7 +77,7 @@ export default function ChatWindow({
   function renderChatMessage(message: ChatMessage): JSX.Element {
     return (
       <span key={message.id} style={{ color: chatColorMap.get(message.group) }} className="block pb-1">
-        [{t(message.group)}] [{message.name}] <br />
+        [{t(`ChatGroup.${message.group}`)}] [{message.name}] <br />
         {message.translation}
         {showTransliteration && message.transliteration && (
           <>
@@ -92,7 +92,7 @@ export default function ChatWindow({
   function renderSystemMessage(systemMessage: SystemMessage): JSX.Element {
     return (
       <span key={systemMessage.id} style={{ color: '#D0F0F0' }} className="block pb-1">
-        [{t('SYSTEM')}] {t(systemMessage.message)} <br />
+        [{t('ChatGroup.SYSTEM')}] {t(systemMessage.message)} <br />
         {t(systemMessage.error?.message ?? '')}
       </span>
     )

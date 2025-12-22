@@ -50,9 +50,9 @@ export class ChatServiceController {
           throw new Error(`Unknown translator type: ${settings.translation.translator}`)
       }
       this.chatLogTailer.startTailing()
-      this.notifyNewSystemMessage(`System Initialized`)
+      this.notifyNewSystemMessage('Messages.systemInitialized')
     } catch (error) {
-      this.notifyNewSystemMessage(`Error when initializing`, error as Error)
+      this.notifyNewSystemMessage('Messages.errorInitializing', error as Error)
     }
   }
 
@@ -94,7 +94,7 @@ export class ChatServiceController {
         this.chatHistory.shift()
       }
     } catch (error) {
-      this.notifyNewSystemMessage(`Error when translating chat message`, error as Error)
+      this.notifyNewSystemMessage('Messages.errorTranslating', error as Error)
     }
   }
 

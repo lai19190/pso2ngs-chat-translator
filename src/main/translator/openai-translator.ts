@@ -14,7 +14,7 @@ export class OpenAITranslator implements Translator {
   constructor(settings: Settings, chatHistory: ChatMessage[]) {
     const openAIConfig = settings.translation.openAI
     if (!openAIConfig.apiKey || !openAIConfig.model) {
-      throw new Error('Please set OpenAI model or api key')
+      throw new Error('LLM.OpenAI.errorMissingConfig')
     }
     this.sourceLanguage = settings.translation.sourceLanguage
     this.destinationLanguage = settings.translation.destinationLanguage

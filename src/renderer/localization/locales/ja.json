@@ -1,56 +1,88 @@
 {
-  "type message here, it will be translated and copied to clipboard": "ここにメッセージを入力すると、翻訳されてクリップボードにコピーされます",
-  "System Initialized": "システムが初期化されました",
-  "Error when initializing": "初期化中にエラーが発生しました",
-  "Error when translating chat message": "チャットメッセージの翻訳中にエラーが発生しました",
-  "Please set OpenAI model or api key": "OpenAIのモデルまたはAPIキーが入力してください",
-  "Please set Gemini model or api key": "GeminiのモデルまたはAPIキーが入力してください",
-  "Welcome to the PSO2NGS Chat Translator!": "PSO2NGSチャット翻訳ツールへようこそ！",
-  "Version": "バージョン",
-  "Update available! please download the latest version from": "アップデートがあります！以下のリンクから最新バージョンをダウンロードしてください",
-
-  "General": "一般",
-  "Translation": "翻訳",
-  "Language": "言語",
-  "English": "英語",
-  "Japanese": "日本語",
-  "Chinese": "中国語",
-  "TraditionalChinese": "繁体字中国語",
-  "SimplifiedChinese": "簡体字中国語",
-  "Spanish": "スペイン語",
-  "Portuguese": "ポルトガル語",
-  "Korean": "韓国語",
-  "French": "フランス語",
-  "German": "ドイツ語",
-  "Italian": "イタリア語",
-  "Russian": "ロシア語",
-  "Indonesian": "インドネシア語",
-  "Tagalog": "タガログ語",
-  "Game Version": "ゲームバージョン",
-  "Game Platform": "ゲームプラットフォーム",
-  "Font Size": "フォントサイズ",
-  "Small": "小",
-  "Medium": "中",
-  "Large": "大",
-  "Show Chat Window Only": "チャットウィンドウのみ表示",
-  "Translator": "翻訳ツール",
-  "OpenAI": "OpenAI",
-  "Gemini": "Gemini",
-  "Google Translate": "Google翻訳",
-  "Local LLM": "ローカルLLM",
-  "Source Language": "原文の言語",
-  "Destination Language": "翻訳先の言語",
-  "Show Japanese Transliteration": "日本語ローマ字を表示",
-  "Transliteration Type": "仮名の種類",
-  "Okurigana": "送り仮名",
-  "Furigana": "振り仮名",
-  "Model": "モデル",
-  "API Key": "APIキー",
-  "API Endpoint": "APIエンドポイント",
-  "PUBLIC": "周囲",
-  "PARTY": "パーティー",
-  "GUILD": "チーム",
-  "REPLY": "ウィスパー",
-  "GROUP": "グループ",
-  "SYSTEM": "システム"
+  "Messages": {
+    "inputPlaceholder": "ここにメッセージを入力すると、翻訳されてクリップボードにコピーされます",
+    "systemInitialized": "システムが初期化されました",
+    "errorInitializing": "初期化中にエラーが発生しました",
+    "errorTranslating": "チャットメッセージの翻訳中にエラーが発生しました",
+    "welcomeMessage": "PSO2NGSチャット翻訳ツールへようこそ！",
+    "version": "バージョン",
+    "updateAvailable": "アップデートがあります！以下のリンクから最新バージョンをダウンロードしてください"
+  },
+  "LLM": {
+    "OpenAI": {
+      "name": "OpenAI",
+      "errorMissingConfig": "OpenAIのモデルまたはAPIキーが入力してください",
+      "model": "モデル",
+      "apiKey": "APIキー"
+    },
+    "Gemini": {
+      "name": "Gemini",
+      "errorMissingConfig": "GeminiのモデルまたはAPIキーが入力してください",
+      "model": "モデル",
+      "apiKey": "APIキー"
+    },
+    "GoogleTranslate": {
+      "name": "Google翻訳"
+    },
+    "LocalLLM": {
+      "name": "ローカルLLM",
+      "errorMissingConfig": "ローカルLLMのエンドポイントとモデルを設定してください",
+      "apiEndpoint": "APIエンドポイント",
+      "model": "モデル",
+      "apiKey": "APIキー"
+    }
+  },
+  "Settings": {
+    "Tabs": {
+      "general": "一般",
+      "translation": "翻訳"
+    },
+    "General": {
+      "language": "言語",
+      "gameVersion": "ゲームバージョン",
+      "gamePlatform": "ゲームプラットフォーム",
+      "fontSize": "フォントサイズ",
+      "showChatWindowOnly": "チャットウィンドウのみ表示"
+    },
+    "Translation": {
+      "translator": "翻訳ツール",
+      "sourceLanguage": "原文の言語",
+      "destinationLanguage": "翻訳先の言語",
+      "showTransliteration": "日本語ローマ字を表示",
+      "transliterationType": "仮名の種類"
+    }
+  },
+  "Languages": {
+    "English": "英語",
+    "Japanese": "日本語",
+    "Chinese": "中国語",
+    "TraditionalChinese": "繁体字中国語",
+    "SimplifiedChinese": "簡体字中国語",
+    "Spanish": "スペイン語",
+    "Portuguese": "ポルトガル語",
+    "Korean": "韓国語",
+    "French": "フランス語",
+    "German": "ドイツ語",
+    "Italian": "イタリア語",
+    "Russian": "ロシア語",
+    "Indonesian": "インドネシア語",
+    "Tagalog": "タガログ語"
+  },
+  "FontSize": {
+    "Small": "小",
+    "Medium": "中",
+    "Large": "大"
+  },
+  "TransliterationType": {
+    "Okurigana": "送り仮名",
+    "Furigana": "振り仮名"
+  },
+  "ChatGroup": {
+    "PUBLIC": "周囲",
+    "PARTY": "パーティー",
+    "GUILD": "チーム",
+    "REPLY": "ウィスパー",
+    "GROUP": "グループ",
+    "SYSTEM": "システム"
+  }
 }

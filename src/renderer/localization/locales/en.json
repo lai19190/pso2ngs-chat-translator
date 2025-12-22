@@ -1,0 +1,88 @@
+{
+  "Messages": {
+    "inputPlaceholder": "type message here, it will be translated and copied to clipboard",
+    "systemInitialized": "System Initialized",
+    "errorInitializing": "Error when initializing",
+    "errorTranslating": "Error when translating chat message",
+    "welcomeMessage": "Welcome to the PSO2NGS Chat Translator!",
+    "version": "Version",
+    "updateAvailable": "Update available! please download the latest version from"
+  },
+  "LLM": {
+    "OpenAI": {
+      "name": "OpenAI",
+      "errorMissingConfig": "Please set OpenAI model or api key",
+      "model": "Model",
+      "apiKey": "API Key"
+    },
+    "Gemini": {
+      "name": "Gemini",
+      "errorMissingConfig": "Please set Gemini model or api key",
+      "model": "Model",
+      "apiKey": "API Key"
+    },
+    "GoogleTranslate": {
+      "name": "Google Translate"
+    },
+    "LocalLLM": {
+      "name": "Local LLM",
+      "errorMissingConfig": "Please set local LLM endpoint and model",
+      "apiEndpoint": "API Endpoint",
+      "model": "Model",
+      "apiKey": "API Key"
+    }
+  },
+  "Settings": {
+    "Tabs": {
+      "general": "General",
+      "translation": "Translation"
+    },
+    "General": {
+      "language": "Language",
+      "gameVersion": "Game Version",
+      "gamePlatform": "Game Platform",
+      "fontSize": "Font Size",
+      "showChatWindowOnly": "Show Chat Window Only"
+    },
+    "Translation": {
+      "translator": "Translator",
+      "sourceLanguage": "Source Language",
+      "destinationLanguage": "Destination Language",
+      "showTransliteration": "Show Japanese Transliteration",
+      "transliterationType": "Transliteration Type"
+    }
+  },
+  "Languages": {
+    "English": "English",
+    "Japanese": "Japanese",
+    "Chinese": "Chinese",
+    "TraditionalChinese": "Traditional Chinese",
+    "SimplifiedChinese": "Simplified Chinese",
+    "Spanish": "Spanish",
+    "Portuguese": "Portuguese",
+    "Korean": "Korean",
+    "French": "French",
+    "German": "German",
+    "Italian": "Italian",
+    "Russian": "Russian",
+    "Indonesian": "Indonesian",
+    "Tagalog": "Tagalog"
+  },
+  "FontSize": {
+    "Small": "Small",
+    "Medium": "Medium",
+    "Large": "Large"
+  },
+  "TransliterationType": {
+    "Okurigana": "Okurigana",
+    "Furigana": "Furigana"
+  },
+  "ChatGroup": {
+    "PUBLIC": "PUBLIC",
+    "PARTY": "PARTY",
+    "GUILD": "GUILD",
+    "REPLY": "REPLY",
+    "GROUP": "GROUP",
+    "SYSTEM": "SYSTEM"
+  }
+}

@@ -28,7 +28,7 @@ export default function InputWindow({ inputValue, setInputValue }: InputWindowPr
     <div className="mt-1.5 h-20 w-full bg-gray-950/50 p-1.5">
       <textarea
         className="h-full w-full resize-none text-white outline-none"
-        placeholder={t('type message here, it will be translated and copied to clipboard')}
+        placeholder={t('Messages.inputPlaceholder')}
         value={inputValue}
         onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void => {
           setInputValue(event.currentTarget.value)

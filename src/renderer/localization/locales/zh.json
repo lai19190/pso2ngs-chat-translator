@@ -1,56 +1,88 @@
 {
-  "type message here, it will be translated and copied to clipboard": "請在此輸入訊息，訊息將會被翻譯並複製到剪貼簿",
-  "System Initialized": "系統初始化完成",
-  "Error when initializing": "初始化時發生錯誤",
-  "Error when translating chat message": "翻譯聊天訊息時發生錯誤",
-  "Please set OpenAI model or api key": "請設置OpenAI模型和API金鑰",
-  "Please set Gemini model or api key": "請設置Gemini模型和API金鑰",
-  "Welcome to the PSO2NGS Chat Translator!": "歡迎使用PSO2NGS聊天翻譯工具！",
-  "Version": "版本",
-  "Update available! please download the latest version from": "有可用的更新！請從以下地址下載最新版本",
-
-  "General": "一般",
-  "Translation": "翻譯",
-  "Language": "語言",
-  "English": "英文",
-  "Japanese": "日文",
-  "Chinese": "中文",
-  "TraditionalChinese": "繁體中文",
-  "SimplifiedChinese": "簡體中文",
-  "Spanish": "西班牙文",
-  "Portuguese": "葡萄牙文",
-  "Korean": "韓文",
-  "French": "法文",
-  "German": "德文",
-  "Italian": "義大利文",
-  "Russian": "俄文",
-  "Indonesian": "印尼文",
-  "Tagalog": "菲律賓語",
-  "Game Version": "遊戲版本",
-  "Game Platform": "遊戲平台",
-  "Font Size": "字體大小",
-  "Small": "小",
-  "Medium": "中",
-  "Large": "大",
-  "Show Chat Window Only": "僅顯示聊天視窗",
-  "Translator": "翻譯器",
-  "OpenAI": "OpenAI",
-  "Gemini": "Gemini",
-  "Google Translate": "Google 翻譯",
-  "Local LLM": "本地 LLM",
-  "Source Language": "來源語言",
-  "Destination Language": "目標語言",
-  "Show Japanese Transliteration": "顯示日語羅馬字",
-  "Transliteration Type": "羅馬字類型",
-  "Okurigana": "送假名",
-  "Furigana": "振假名",
-  "Model": "模型",
-  "API Key": "API 金鑰",
-  "API Endpoint": "API 地址",
-  "PUBLIC": "公開",
-  "PARTY": "隊伍",
-  "GUILD": "公會",
-  "REPLY": "悄悄話",
-  "GROUP": "群組",
-  "SYSTEM": "系統"
+  "Messages": {
+    "inputPlaceholder": "請在此輸入訊息，訊息將會被翻譯並複製到剪貼簿",
+    "systemInitialized": "系統初始化完成",
+    "errorInitializing": "初始化時發生錯誤",
+    "errorTranslating": "翻譯聊天訊息時發生錯誤",
+    "welcomeMessage": "歡迎使用PSO2NGS聊天翻譯工具！",
+    "version": "版本",
+    "updateAvailable": "有可用的更新！請從以下地址下載最新版本"
+  },
+  "LLM": {
+    "OpenAI": {
+      "name": "OpenAI",
+      "errorMissingConfig": "請設置OpenAI模型和API金鑰",
+      "model": "模型",
+      "apiKey": "API 金鑰"
+    },
+    "Gemini": {
+      "name": "Gemini",
+      "errorMissingConfig": "請設置Gemini模型和API金鑰",
+      "model": "模型",
+      "apiKey": "API 金鑰"
+    },
+    "GoogleTranslate": {
+      "name": "Google 翻譯"
+    },
+    "LocalLLM": {
+      "name": "本地 LLM",
+      "errorMissingConfig": "請設置本地LLM端點和模型",
+      "apiEndpoint": "API 地址",
+      "model": "模型",
+      "apiKey": "API 金鑰"
+    }
+  },
+  "Settings": {
+    "Tabs": {
+      "general": "一般",
+      "translation": "翻譯"
+    },
+    "General": {
+      "language": "語言",
+      "gameVersion": "遊戲版本",
+      "gamePlatform": "遊戲平台",
+      "fontSize": "字體大小",
+      "showChatWindowOnly": "僅顯示聊天視窗"
+    },
+    "Translation": {
+      "translator": "翻譯器",
+      "sourceLanguage": "來源語言",
+      "destinationLanguage": "目標語言",
+      "showTransliteration": "顯示日語羅馬字",
+      "transliterationType": "羅馬字類型"
+    }
+  },
+  "Languages": {
+    "English": "英文",
+    "Japanese": "日文",
+    "Chinese": "中文",
+    "TraditionalChinese": "繁體中文",
+    "SimplifiedChinese": "簡體中文",
+    "Spanish": "西班牙文",
+    "Portuguese": "葡萄牙文",
+    "Korean": "韓文",
+    "French": "法文",
+    "German": "德文",
+    "Italian": "義大利文",
+    "Russian": "俄文",
+    "Indonesian": "印尼文",
+    "Tagalog": "菲律賓語"
+  },
+  "FontSize": {
+    "Small": "小",
+    "Medium": "中",
+    "Large": "大"
+  },
+  "TransliterationType": {
+    "Okurigana": "送假名",
+    "Furigana": "振假名"
+  },
+  "ChatGroup": {
+    "PUBLIC": "公開",
+    "PARTY": "隊伍",
+    "GUILD": "公會",
+    "REPLY": "悄悄話",
+    "GROUP": "群組",
+    "SYSTEM": "系統"
+  }
 }
