@@ -27,8 +27,7 @@ app.whenReady().then(async () => {
   const settingsManager = new SettingsManager()
   const settings = settingsManager.getSettings()
   const mainWindow = createWindow(settings)
-  const chatServiceController = new ChatServiceController(mainWindow)
-  chatServiceController.start(settings)
+  const chatServiceController = new ChatServiceController(mainWindow, settings)
 
   ipcMain.handle('get-settings', async () => {
     return settingsManager.getSettings()

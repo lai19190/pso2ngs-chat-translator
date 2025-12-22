@@ -11,63 +11,73 @@ import pLimit from 'p-limit'
 export class ChatServiceController {
   private mainWindow: BrowserWindow
 
-  private settings?: Settings
-  private chatLogTailer?: ChatLogTailer
-  private translator?: Translator
+  private settings: Settings
+  private chatLogTailer: ChatLogTailer
+  private translator: Translator
 
   private chatHistory: ChatMessage[] = []
   private systemMessageCount = 0
   private queue = pLimit(1)
 
-  constructor(mainWindow: BrowserWindow) {
+  constructor(mainWindow: BrowserWindow, settings: Settings) {
     this.mainWindow = mainWindow
     SetupKuroshiro()
+
+    this.settings = settings
+    const { chatLogTailer, translator } = this.start(settings)
+    this.chatLogTailer = chatLogTailer
+    this.translator = translator
   }
 
-  async start(settings: Settings): Promise<void> {
+  start(settings: Settings): {
+    chatLogTailer: ChatLogTailer
+    translator: Translator
+  } {
     try {
-      this.settings = settings
-      this.chatLogTailer = new ChatLogTailer(settings)
-      this.chatLogTailer.on('new-message', async (chatMessage: ChatMessage) => {
+      const chatLogTailer = new ChatLogTailer(settings)
+      chatLogTailer.on('new-message', async (chatMessage: ChatMessage) => {
         await this.queue(() => this.notifyNewChatMessage(chatMessage))
       })
+      let translator: Translator
       switch (settings.translation.translator) {
         case TranslatorType.Gemini:
         case TranslatorType.OpenAI:
         case TranslatorType.LocalLLM:
         case TranslatorType.XAI:
-          this.translator = new LangChainTranslator(settings, this.chatHistory)
+          translator = new LangChainTranslator(settings, this.chatHistory)
           break
         case TranslatorType.GoogleTranslate:
-          this.translator = new GoogleTranslator(settings)
+          translator = new GoogleTranslator(settings)
           break
         default:
           throw new Error(`Unknown translator type: ${settings.translation.translator}`)
       }
-      this.chatLogTailer.startTailing()
+      chatLogTailer.startTailing()
       this.notifyNewSystemMessage('Messages.systemInitialized')
+      return {
+        chatLogTailer: chatLogTailer,
+        translator: translator
+      }
     } catch (error) {
       this.notifyNewSystemMessage('Messages.errorInitializing', error as Error)
+      throw new Error('Failed to start ChatServiceController')
     }
   }
 
   stop(): void {
-    this.chatLogTailer?.stopTailing()
+    this.chatLogTailer.stopTailing()
   }
 
   async restart(settings: Settings): Promise<void> {
     this.stop()
-    await this.start(settings)
+    this.start(settings)
   }
 
   async notifyNewChatMessage(chatMessage: ChatMessage): Promise<void> {
     try {
-      if (!this.translator) {
-        throw new Error(`Translator not initialized`)
-      }
       const translatedChatMessage = await this.translator.translateToDestinationLanguage(chatMessage.name, chatMessage.message)
       chatMessage.translation = translatedChatMessage
-      if (this.settings?.translation.showTransliteration) {
+      if (this.settings.translation.showTransliteration) {
         const detectedLanguage = franc(chatMessage.message, { minLength: 1 })
         if (detectedLanguage === 'jpn') {
           // add transliteration to the message
