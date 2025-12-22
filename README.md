@@ -15,6 +15,7 @@ A multi-language chat translator for the Japanese MMORPG **Phantasy Star Online 
 - **Translator Options**:
   - OpenAI
   - Gemini AI
+  - Grok
   - Local LLM
     - OpenAI API compatible, e.g. Ollama
   - Google Translate
@@ -34,6 +35,7 @@ A multi-language chat translator for the Japanese MMORPG **Phantasy Star Online 
    - Set model & API key if applicable
      - OpenAI: [Model](https://platform.openai.com/docs/models), [API Key](https://platform.openai.com/api-keys)
      - Gemini: [Model](https://ai.google.dev/gemini-api/docs/models), [API Key](https://ai.google.dev/gemini-api/docs/api-key)
+     - Grok: [Model](https://docs.x.ai/docs/models), [API Key](https://console.x.ai/)
    - Set source and destination languages.
    - Enable transliteration if needed.
 3. View translated messages in the Chat Window.

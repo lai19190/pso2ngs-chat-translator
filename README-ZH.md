@@ -15,6 +15,7 @@
 - **翻譯選項**：
   - OpenAI
   - Gemini AI
+  - Grok
   - 本地 LLM
     - 需要相容 OpenAI API，例如 Ollama
   - Google Translate
@@ -34,6 +35,7 @@
    - 若有需要，設定模型與 API 金鑰
      - OpenAI：[模型](https://platform.openai.com/docs/models)、[API 金鑰](https://platform.openai.com/api-keys)
      - Gemini：[模型](https://ai.google.dev/gemini-api/docs/models)、[API 金鑰](https://ai.google.dev/gemini-api/docs/api-key)
+     - Grok：[模型](https://docs.x.ai/docs/models)、[API 金鑰](https://console.x.ai/)
    - 設定來源語言與目標語言。
    - 如有需要，可啟用日語羅馬字功能。
 3. 翻譯後的訊息會顯示在聊天視窗中。

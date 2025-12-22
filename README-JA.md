@@ -15,6 +15,7 @@
 - **翻訳エンジン選択**：
   - OpenAI
   - Gemini AI
+  - Grok
   - ローカル LLM
     - OpenAI API互換性が必要（例：Ollama）
   - Google翻訳
@@ -34,6 +35,7 @@
    - モデルやAPIキーを入力（必要に応じて）
      - OpenAI：[モデル](https://platform.openai.com/docs/models)、[APIキー](https://platform.openai.com/api-keys)
      - Gemini：[モデル](https://ai.google.dev/gemini-api/docs/models)、[APIキー](https://ai.google.dev/gemini-api/docs/api-key)
+     - Grok：[モデル](https://docs.x.ai/docs/models)、[APIキー](https://console.x.ai/)
    - 翻訳元・翻訳先の言語を指定。
    - 必要に応じて、ローマ字変換を有効化。
 3. 翻訳されたメッセージはチャットウィンドウに表示。
