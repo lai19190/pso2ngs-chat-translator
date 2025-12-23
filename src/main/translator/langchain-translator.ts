@@ -89,9 +89,9 @@ export class LangChainTranslator implements Translator {
     return await this.translate('REPLY', message, this.sourceLanguage)
   }
 
-  private async translate(name: string, message: string, targetLanguage: Language): Promise<string> {
+  private async translate(speakerName: string, message: string, targetLanguage: Language): Promise<string> {
     const translatorInput: TranslatorMessageInput = {
-      name,
+      speakerName,
       message,
       targetLanguage
     }

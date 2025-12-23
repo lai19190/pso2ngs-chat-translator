@@ -4,6 +4,6 @@ export function GeneratePromptWithChatHistory(systemPrompt: string, chatHistory:
   if (chatHistory.length === 0) {
     return systemPrompt
   }
-  const history = chatHistory.map((chat) => JSON.stringify({ name: chat.name, group: chat.group, message: chat.message })).join('\n')
+  const history = chatHistory.map((chat) => `[${chat.group}]${chat.name}:${chat.message}`).join('\n')
   return `${systemPrompt}\nChat History:\n${history}`
 }

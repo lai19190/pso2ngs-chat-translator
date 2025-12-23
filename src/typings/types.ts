@@ -119,7 +119,7 @@ export enum TranslatorType {
 }
 
 export type TranslatorMessageInput = {
-  name: string
+  speakerName: string
   targetLanguage: Language
   message: string
 }
