@@ -34,7 +34,7 @@ export default function InputWindow({ inputValue, setInputValue }: InputWindowPr
   return (
     <div className="mt-1.5 h-20 w-full bg-gray-950/50 p-1.5">
       <textarea
-        className="h-full w-full resize-none text-white outline-none"
+        className="h-full w-full resize-none text-white outline-none [word-spacing:0.15rem]"
         placeholder={t('Messages.inputPlaceholder')}
         value={inputValue}
         onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void => {

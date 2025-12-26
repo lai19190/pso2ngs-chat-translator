@@ -43,7 +43,7 @@ export default function ChatWindow({
   }, [messages, hovered])
 
   return (
-    <div ref={chatWindowDivRef} className="w-full flex-grow overflow-y-auto bg-gray-950/50 p-1 wrap-break-word">
+    <div ref={chatWindowDivRef} className="w-full flex-grow overflow-y-auto bg-gray-950/50 p-1 wrap-break-word [word-spacing:0.15rem]">
       <p>
         <span className="block pb-1 text-white">
           {t('Messages.welcomeMessage')}
@@ -79,9 +79,9 @@ export default function ChatWindow({
   function renderChatMessage(message: ChatMessage): JSX.Element {
     const formattedTime = showTimestamp ? formatTimestamp(message.timestamp) : null
     return (
-      <span key={message.id} style={{ color: chatColorMap.get(message.group) }} className="block pb-1">
+      <span key={message.id} style={{ color: chatColorMap.get(message.group) }} className="block pb-1 whitespace-pre-wrap">
         {formattedTime && `[${formattedTime}] `}[{t(`ChatGroup.${message.group}`)}] [{message.name}] <br />
-        <span className="whitespace-pre-wrap">{message.translation}</span>
+        <span>{message.translation}</span>
         {showTransliteration && message.transliteration && (
           <>
             <br />
@@ -111,7 +111,6 @@ export default function ChatWindow({
 
   function parseTransliteration(transliteration: string): string | JSX.Element | JSX.Element[] {
     // replace all new lines with <br /> tag
-    transliteration = transliteration.replace(/\n/g, '<br />')
     return parse(transliteration, {
       replace(domNode) {
         if (domNode instanceof Element && domNode.attribs && domNode.name === 'rt') {
