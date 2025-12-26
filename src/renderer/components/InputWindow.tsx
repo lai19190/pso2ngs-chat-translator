@@ -10,8 +10,15 @@ export default function InputWindow({ inputValue, setInputValue }: InputWindowPr
   const onInputKeyDown = async (event: React.KeyboardEvent<HTMLTextAreaElement>): Promise<void> => {
     if (event.key == 'Enter' && event.altKey === true) {
       event.preventDefault()
-      event.currentTarget.value += '\n'
-      setInputValue(event.currentTarget.value)
+      const textarea = event.currentTarget
+      const cursorPosition = textarea.selectionStart
+      const textBefore = textarea.value.substring(0, cursorPosition)
+      const textAfter = textarea.value.substring(cursorPosition)
+      const newValue = textBefore + '\n' + textAfter
+      textarea.value = newValue
+      setInputValue(newValue)
+      // Set cursor position after the inserted newline
+      textarea.selectionStart = textarea.selectionEnd = cursorPosition + 1
       return
     }
     if (event.key == 'Enter') {
