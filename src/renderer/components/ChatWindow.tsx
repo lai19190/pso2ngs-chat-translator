@@ -81,7 +81,7 @@ export default function ChatWindow({
     return (
       <span key={message.id} style={{ color: chatColorMap.get(message.group) }} className="block pb-1">
         {formattedTime && `[${formattedTime}] `}[{t(`ChatGroup.${message.group}`)}] [{message.name}] <br />
-        {message.translation}
+        <span className="whitespace-pre-wrap">{message.translation}</span>
         {showTransliteration && message.transliteration && (
           <>
             <br />
