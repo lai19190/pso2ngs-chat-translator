@@ -1,12 +1,12 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-ngs: 'ngs-font', sans-serif;
+  --font-ngs: 'font-ngs';
 }
 
 @font-face {
-  font-family: 'ngs-font';
-  src: url('$fonts/ngs_font.ttf') format('truetype');
+  font-family: 'font-ngs';
+  src: url('$fonts/dfp-kakougothic-w5.ttf') format('truetype');
 }
 
 ::-webkit-scrollbar {
