@@ -60,7 +60,7 @@ export class ChatServiceController {
       }
     } catch (error) {
       this.notifyNewSystemMessage('Messages.errorInitializing', error as Error)
-      throw new Error('Failed to start ChatServiceController')
+      throw new Error('Failed to start ChatServiceController' + (error instanceof Error ? ': ' + error.message : ''))
     }
   }
 

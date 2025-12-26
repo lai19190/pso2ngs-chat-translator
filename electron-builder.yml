@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: pso2ngs-chat-translator
+appId: com.pso2ngs.translator
+productName: PSO2NGS Chat Translator
 files:
   - '!**/.vscode/*'
   - '!src/*'

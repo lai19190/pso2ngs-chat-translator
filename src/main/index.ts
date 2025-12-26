@@ -72,6 +72,7 @@ function createWindow(settings: Settings): BrowserWindow {
   const mainWindow = new BrowserWindow({
     show: false,
     icon,
+    title: 'PSO2NGS Chat Translator',
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
