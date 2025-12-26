@@ -52,9 +52,13 @@ export default function App(): JSX.Element {
     return cleanup
   }, [messages])
 
+  if (!settings) {
+    return <div>Loading...</div>
+  }
+
   const onTranslationWindow = content === MainWindowContent.TRANSLATION
   const onSettingsWindow = content === MainWindowContent.SETTINGS
-  const showAllWindows = hovered || !settings?.general.showChatWindowOnly
+  const showAllWindows = hovered || !settings.general.showChatWindowOnly
 
   return (
     <div
@@ -72,8 +76,8 @@ export default function App(): JSX.Element {
             messages={messages}
             hovered={hovered}
             transliterationFontClassName={transliterationFontClassName}
-            showTransliteration={settings?.translation.showTransliteration}
-            showTimestamp={settings?.general.showTimestamp}
+            showTransliteration={settings.translation.showTransliteration}
+            showTimestamp={settings.general.showTimestamp}
             appUpdateInfo={appUpdateInfo}
           />
           {showAllWindows && <InputWindow inputValue={inputValue} setInputValue={setInputValue} />}
