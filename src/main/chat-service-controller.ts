@@ -70,6 +70,7 @@ export class ChatServiceController {
 
   async restart(settings: Settings): Promise<void> {
     this.stop()
+    this.settings = settings
     const { chatLogTailer, translator } = this.start(settings)
     this.chatLogTailer = chatLogTailer
     this.translator = translator

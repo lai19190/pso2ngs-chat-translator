@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const TranslatorOutputSchema = z.object({
-  translatedMessage: z.string().describe('The translated message text only, preserving tone, personality, in-game slang, and kaomoji')
+  translatedMessage: z.string().describe('ONLY the translated message text only, preserving tone, personality, in-game slang, and kaomoji')
 })
 
 export const DEFAULT_SYSTEM_PROMPT = `
