@@ -49,6 +49,11 @@ export default function ChatWindow({
           {t('Messages.welcomeMessage')}
           <br />
           {t('Messages.version')} {appUpdateInfo?.currentVersion}
+          <br />
+          {'Twitter: '}
+          <a href="https://twitter.com/usami_pso2ngs" rel="noreferrer" target="_blank" className="underline">
+            @usami_pso2ngs
+          </a>
           {appUpdateInfo?.updateAvailable && (
             <>
               <br />

@@ -4,7 +4,7 @@
     "systemInitialized": "System Initialized",
     "errorInitializing": "Error when initializing",
     "errorTranslating": "Error when translating chat message",
-    "welcomeMessage": "Welcome to the PSO2NGS Chat Translator!",
+    "welcomeMessage": "Welcome to PSO2NGS Chat Translator!",
     "version": "Version",
     "updateAvailable": "Update available! please download the latest version from"
   },

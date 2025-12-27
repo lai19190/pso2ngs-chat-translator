@@ -37,7 +37,7 @@ function ToggleSwitch({ defaultChecked, register }: { defaultChecked?: boolean; 
 // OpenAI Settings Section
 function OpenAISettings({ register }: { register: UseFormRegister<Settings> }): JSX.Element {
   const { t } = useTranslation()
-  const openAIModelIDs = ['gpt-4.1', 'gpt-4.1-nano', 'gpt-4o-mini', 'o4-mini', 'o3']
+  const openAIModelIDs = ['gpt-5-nano', 'gpt-5-mini', 'gpt-4.1-nano', 'gpt-4.1-mini']
 
   return (
     <>
@@ -64,7 +64,7 @@ function OpenAISettings({ register }: { register: UseFormRegister<Settings> }): 
 // Gemini Settings Section
 function GeminiSettings({ register }: { register: UseFormRegister<Settings> }): JSX.Element {
   const { t } = useTranslation()
-  const geminiModelIDs = ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-1.5-pro', 'gemini-1.5-flash']
+  const geminiModelIDs = ['gemini-2.5-flash-lite']
 
   return (
     <>
