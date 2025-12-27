@@ -8,7 +8,7 @@ export type InputWindowProps = {
 export default function InputWindow({ inputValue, setInputValue }: InputWindowProps): JSX.Element {
   const { t } = useTranslation()
   const onInputKeyDown = async (event: React.KeyboardEvent<HTMLTextAreaElement>): Promise<void> => {
-    if (event.key == 'Enter' && event.altKey === true) {
+    if (event.key == 'Enter' && (event.altKey === true || event.shiftKey === true)) {
       event.preventDefault()
       const textarea = event.currentTarget
       const cursorPosition = textarea.selectionStart
