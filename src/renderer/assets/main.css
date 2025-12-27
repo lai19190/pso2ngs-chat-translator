@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: 'font-ngs';
-  src: url('$fonts/dfp-kakougothic-w5.ttf') format('truetype');
+  src: url('$fonts/font-ngs.ttf') format('truetype');
 }
 
 ::-webkit-scrollbar {
