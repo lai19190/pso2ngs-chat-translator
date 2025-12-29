@@ -61,6 +61,10 @@ describe('Chat Log Santizer', () => {
     expect(SanitizeChatMessage(`/mpal2`)).toBe('')
     expect(SanitizeChatMessage(`/mpal1 /a 復活しました、有難う！`)).toBe('復活しました、有難う！')
   })
+  test('swp', async () => {
+    expect(SanitizeChatMessage(`/swp3`)).toBe('')
+    expect(SanitizeChatMessage(`/swp1 /mf5 all /mn12 ただいま戻りましたー`)).toBe('ただいま戻りましたー')
+  })
   test('spal', async () => {
     expect(SanitizeChatMessage(`/spal2`)).toBe('')
     expect(SanitizeChatMessage(`/spal1 /mpal1 /vo12`)).toBe('')

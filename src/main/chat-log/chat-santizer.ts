@@ -9,6 +9,7 @@ const regexs: Record<string, RegExp> = {
   msRegex: /^\/(ms|myset)\d+/,
   mfRegex: /^\/(mf|myfashion)\d+(?: all)?/,
   mpalRegex: /^\/(mpal|mainpalette)\d+/,
+  swpRegex: /^\/swp\d+/,
   spalRegex: /^\/(spal|sainpalette)\d+/,
   ciRegex: /^\/ci\d{1,2}(?: (?:\d)?)?/,
   togeRegex: /^\/toge/,
