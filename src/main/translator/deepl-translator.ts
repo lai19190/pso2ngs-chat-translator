@@ -30,8 +30,8 @@ export class DeepLTranslator implements Translator {
     const languageMap: Record<Language, deepl.TargetLanguageCode> = {
       en: 'en-US',
       ja: 'ja',
-      'zh-TW': 'zh-HANS',
-      'zh-CN': 'zh-HANT',
+      'zh-TW': 'zh-HANT',
+      'zh-CN': 'zh-HANS',
       es: 'es',
       pt: 'pt-BR',
       ko: 'ko',
