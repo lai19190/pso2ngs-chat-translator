@@ -26,7 +26,7 @@ export class LangChainTranslator implements Translator {
       case TranslatorType.OpenAI: {
         const openAIConfig = settings.translation.openAI
         if (!openAIConfig.apiKey || !openAIConfig.model) {
-          throw new Error('LLM.OpenAI.errorMissingConfig')
+          throw new Error('Translator.OpenAI.errorMissingConfig')
         }
         return new ChatOpenAI({
           apiKey: openAIConfig.apiKey,
@@ -38,7 +38,7 @@ export class LangChainTranslator implements Translator {
       case TranslatorType.Gemini: {
         const geminiConfig = settings.translation.gemini
         if (!geminiConfig.apiKey || !geminiConfig.model) {
-          throw new Error('LLM.Gemini.errorMissingConfig')
+          throw new Error('Translator.Gemini.errorMissingConfig')
         }
         return new ChatGoogleGenerativeAI({
           apiKey: geminiConfig.apiKey,
@@ -49,7 +49,7 @@ export class LangChainTranslator implements Translator {
       case TranslatorType.LocalLLM: {
         const localLLMConfig = settings.translation.localLLM
         if (!localLLMConfig.apiEndpoint || !localLLMConfig.model) {
-          throw new Error('LLM.LocalLLM.errorMissingConfig')
+          throw new Error('Translator.LocalTranslator.errorMissingConfig')
         }
         return new ChatOpenAI({
           configuration: {
@@ -64,7 +64,7 @@ export class LangChainTranslator implements Translator {
       case TranslatorType.XAI: {
         const xaiConfig = settings.translation.xai
         if (!xaiConfig.apiKey || !xaiConfig.model) {
-          throw new Error('LLM.XAI.errorMissingConfig')
+          throw new Error('Translator.XAI.errorMissingConfig')
         }
         return new ChatOpenAI({
           configuration: {

@@ -29,7 +29,8 @@ export class SettingsManager {
           openAI: {},
           gemini: {},
           localLLM: {},
-          xai: {}
+          xai: {},
+          deepl: {}
         },
         window: {
           width: 330,

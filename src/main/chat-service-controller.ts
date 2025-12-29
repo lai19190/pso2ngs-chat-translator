@@ -6,6 +6,7 @@ import { Translator } from '../typings/interface'
 import { kuroshiro, SetupKuroshiro } from './translator/kuroshiro'
 import { GoogleTranslator } from './translator/google-translator'
 import { LangChainTranslator } from './translator/langchain-translator'
+import { DeepLTranslator } from './translator/deepl-translator'
 import pLimit from 'p-limit'
 
 export class ChatServiceController {
@@ -48,6 +49,9 @@ export class ChatServiceController {
           break
         case TranslatorType.GoogleTranslate:
           translator = new GoogleTranslator(settings)
+          break
+        case TranslatorType.DeepL:
+          translator = new DeepLTranslator(settings)
           break
         default:
           throw new Error(`Unknown translator type: ${settings.translation.translator}`)

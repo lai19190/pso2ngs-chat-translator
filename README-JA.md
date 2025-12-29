@@ -13,12 +13,13 @@
 
 - **リアルタイム翻訳**：チャットメッセージを複数の言語間で即時に翻訳。
 - **翻訳エンジン選択**：
+  - Google翻訳
+  - DeepL
   - OpenAI
   - Gemini AI
   - Grok
   - ローカル LLM
     - OpenAI API互換性が必要（例：Ollama）
-  - Google翻訳
 - **ローマ字変換対応**：日本語をローマ字に変換可能（振り仮名・送り仮名）
 
 ## インストール
@@ -36,6 +37,7 @@
      - OpenAI：[モデル](https://platform.openai.com/docs/models)、[APIキー](https://platform.openai.com/api-keys)
      - Gemini：[モデル](https://ai.google.dev/gemini-api/docs/models)、[APIキー](https://ai.google.dev/gemini-api/docs/api-key)
      - Grok：[モデル](https://docs.x.ai/docs/models)、[APIキー](https://console.x.ai/)
+     - DeepL：[APIキー](https://www.deepl.com/pro-api)
    - 翻訳元・翻訳先の言語を指定。
    - 必要に応じて、ローマ字変換を有効化。
 3. 翻訳されたメッセージはチャットウィンドウに表示。

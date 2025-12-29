@@ -61,6 +61,9 @@ export type Settings = {
       model?: string
       apiKey?: string
     }
+    deepl: {
+      apiKey?: string
+    }
   }
   window: Partial<Rectangle>
 }
@@ -111,9 +114,10 @@ export enum Language {
 }
 
 export enum TranslatorType {
+  GoogleTranslate = 'GoogleTranslate',
+  DeepL = 'DeepL',
   OpenAI = 'OpenAI',
   Gemini = 'Gemini',
-  GoogleTranslate = 'GoogleTranslate',
   LocalLLM = 'LocalLLM',
   XAI = 'XAI'
 }

@@ -8,7 +8,7 @@
     "version": "版本",
     "updateAvailable": "有可用的更新！請從以下地址下載最新版本"
   },
-  "LLM": {
+  "Translator": {
     "OpenAI": {
       "name": "OpenAI",
       "errorMissingConfig": "請設置OpenAI模型和API金鑰",
@@ -35,6 +35,11 @@
       "name": "Grok",
       "errorMissingConfig": "請設置Grok模型和API金鑰",
       "model": "模型",
+      "apiKey": "API 金鑰"
+    },
+    "DeepL": {
+      "name": "DeepL",
+      "errorMissingConfig": "請設置DeepL API金鑰",
       "apiKey": "API 金鑰"
     }
   },

@@ -8,7 +8,7 @@
     "version": "バージョン",
     "updateAvailable": "アップデートがあります！以下のリンクから最新バージョンをダウンロードしてください"
   },
-  "LLM": {
+  "Translator": {
     "OpenAI": {
       "name": "OpenAI",
       "errorMissingConfig": "OpenAIのモデルまたはAPIキーが入力してください",
@@ -35,6 +35,11 @@
       "name": "Grok",
       "errorMissingConfig": "GrokのモデルまたはAPIキーが入力してください",
       "model": "モデル",
+      "apiKey": "APIキー"
+    },
+    "DeepL": {
+      "name": "DeepL",
+      "errorMissingConfig": "DeepLのAPIキーが入力してください",
       "apiKey": "APIキー"
     }
   },

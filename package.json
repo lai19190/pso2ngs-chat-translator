@@ -33,6 +33,7 @@
     "@langchain/google-genai": "^2.1.2",
     "@langchain/openai": "^1.2.0",
     "cron": "^4.3.0",
+    "deepl-node": "^1.24.0",
     "electron-store": "^8.2.0",
     "franc": "^6.2.0",
     "html-react-parser": "^5.2.3",

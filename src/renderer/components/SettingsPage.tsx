@@ -41,9 +41,9 @@ function OpenAISettings({ register }: { register: UseFormRegister<Settings> }): 
 
   return (
     <>
-      <SettingsSubtitle>{t('LLM.OpenAI.name')}</SettingsSubtitle>
+      <SettingsSubtitle>{t('Translator.OpenAI.name')}</SettingsSubtitle>
       <SettingsColumn>
-        <label>{t('LLM.OpenAI.model')}</label>
+        <label>{t('Translator.OpenAI.model')}</label>
         <input className="w-full rounded border px-1" list="openAI-model" {...register('translation.openAI.model')} />
         <datalist id="openAI-model">
           {openAIModelIDs.map((model) => (
@@ -54,7 +54,7 @@ function OpenAISettings({ register }: { register: UseFormRegister<Settings> }): 
         </datalist>
       </SettingsColumn>
       <SettingsColumn>
-        <label>{t('LLM.OpenAI.apiKey')}</label>
+        <label>{t('Translator.OpenAI.apiKey')}</label>
         <input className="w-full rounded border px-1" {...register('translation.openAI.apiKey')} />
       </SettingsColumn>
     </>
@@ -68,9 +68,9 @@ function GeminiSettings({ register }: { register: UseFormRegister<Settings> }): 
 
   return (
     <>
-      <SettingsSubtitle>{t('LLM.Gemini.name')}</SettingsSubtitle>
+      <SettingsSubtitle>{t('Translator.Gemini.name')}</SettingsSubtitle>
       <SettingsColumn>
-        <label>{t('LLM.Gemini.model')}</label>
+        <label>{t('Translator.Gemini.model')}</label>
         <input className="w-full rounded border px-1" list="gemini-model" {...register('translation.gemini.model')} />
         <datalist id="gemini-model">
           {geminiModelIDs.map((model) => (
@@ -81,7 +81,7 @@ function GeminiSettings({ register }: { register: UseFormRegister<Settings> }): 
         </datalist>
       </SettingsColumn>
       <SettingsColumn>
-        <label>{t('LLM.Gemini.apiKey')}</label>
+        <label>{t('Translator.Gemini.apiKey')}</label>
         <input className="w-full rounded border px-1" {...register('translation.gemini.apiKey')} />
       </SettingsColumn>
     </>
@@ -94,17 +94,17 @@ function LocalLLMSettings({ register }: { register: UseFormRegister<Settings> })
 
   return (
     <>
-      <SettingsSubtitle>{t('LLM.LocalLLM.name')}</SettingsSubtitle>
+      <SettingsSubtitle>{t('Translator.LocalTranslator.name')}</SettingsSubtitle>
       <SettingsColumn>
-        <label>{t('LLM.LocalLLM.apiEndpoint')}</label>
+        <label>{t('Translator.LocalTranslator.apiEndpoint')}</label>
         <input className="w-full rounded border px-1" placeholder="http://localhost:11434/v1" {...register('translation.localLLM.apiEndpoint')} />
       </SettingsColumn>
       <SettingsColumn>
-        <label>{t('LLM.LocalLLM.model')}</label>
+        <label>{t('Translator.LocalTranslator.model')}</label>
         <input className="w-full rounded border px-1" {...register('translation.localLLM.model')} />
       </SettingsColumn>
       <SettingsColumn>
-        <label>{t('LLM.LocalLLM.apiKey')}</label>
+        <label>{t('Translator.LocalTranslator.apiKey')}</label>
         <input className="w-full rounded border px-1" {...register('translation.localLLM.apiKey')} />
       </SettingsColumn>
     </>
@@ -118,9 +118,9 @@ function XAISettings({ register }: { register: UseFormRegister<Settings> }): JSX
 
   return (
     <>
-      <SettingsSubtitle>{t('LLM.XAI.name')}</SettingsSubtitle>
+      <SettingsSubtitle>{t('Translator.XAI.name')}</SettingsSubtitle>
       <SettingsColumn>
-        <label>{t('LLM.XAI.model')}</label>
+        <label>{t('Translator.XAI.model')}</label>
         <input className="w-full rounded border px-1" list="xai-model" {...register('translation.xai.model')} />
         <datalist id="xai-model">
           {xaiModelIDs.map((model) => (
@@ -131,8 +131,23 @@ function XAISettings({ register }: { register: UseFormRegister<Settings> }): JSX
         </datalist>
       </SettingsColumn>
       <SettingsColumn>
-        <label>{t('LLM.XAI.apiKey')}</label>
+        <label>{t('Translator.XAI.apiKey')}</label>
         <input className="w-full rounded border px-1" {...register('translation.xai.apiKey')} />
+      </SettingsColumn>
+    </>
+  )
+}
+
+// DeepL Settings Section
+function DeepLSettings({ register }: { register: UseFormRegister<Settings> }): JSX.Element {
+  const { t } = useTranslation()
+
+  return (
+    <>
+      <SettingsSubtitle>{t('Translator.DeepL.name')}</SettingsSubtitle>
+      <SettingsColumn>
+        <label>{t('Translator.DeepL.apiKey')}</label>
+        <input className="w-full rounded border px-1" {...register('translation.deepl.apiKey')} />
       </SettingsColumn>
     </>
   )
@@ -226,7 +241,7 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
             <select {...register('translation.translator', { required: true })}>
               {(Object.keys(TranslatorType) as Array<keyof typeof TranslatorType>).map((key) => (
                 <option key={key} value={TranslatorType[key]}>
-                  {t(`LLM.${TranslatorType[key]}.name`)}
+                  {t(`Translator.${TranslatorType[key]}.name`)}
                 </option>
               ))}
             </select>
@@ -275,6 +290,7 @@ export default function SettingsPage({ settings, setSettings }: SettingsPageProp
           {settings.translation.translator === TranslatorType.Gemini && <GeminiSettings register={register} />}
           {settings.translation.translator === TranslatorType.LocalLLM && <LocalLLMSettings register={register} />}
           {settings.translation.translator === TranslatorType.XAI && <XAISettings register={register} />}
+          {settings.translation.translator === TranslatorType.DeepL && <DeepLSettings register={register} />}
         </TabPanel>
       </Tabs>
     </form>
