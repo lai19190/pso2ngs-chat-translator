@@ -76,6 +76,8 @@ describe('Chat Log Santizer', () => {
     expect(SanitizeChatMessage(`/ci3 1`)).toBe('')
     expect(SanitizeChatMessage(`/ci3 1 ｳｫｵｵｵｵｵｵｱｱｱｱｱｱｱ`)).toBe('ｳｫｵｵｵｵｵｵｱｱｱｱｱｱｱ')
     expect(SanitizeChatMessage(`/ci9 nw s60`)).toBe('')
+    expect(SanitizeChatMessage(`/ci9 t5 1`)).toBe('')
+    expect(SanitizeChatMessage(`/ci9 1 t5`)).toBe('')
     expect(SanitizeChatMessage(`/la cameraappeal /ci8 1 /mn38 /moya よろしくです♪`)).toBe('よろしくです♪')
     expect(SanitizeChatMessage(`/cla hello ha thumbsup /ci7 1 t5`)).toBe('')
     expect(SanitizeChatMessage(`/moya /ci1 t5 {vio}フォトンブラストするクマ`)).toBe('フォトンブラストするクマ')
@@ -109,7 +111,12 @@ describe('Chat Log Santizer', () => {
     expect(SanitizeChatMessage(`/uioff /ce7 s0.24`)).toBe('')
     expect(SanitizeChatMessage(`/uioff 600`)).toBe('')
   })
-  test('cmf', async () => {
+  test('costume', async () => {
+    expect(SanitizeChatMessage(`/costume ウェイカー`)).toBe('')
+    expect(SanitizeChatMessage(`/cs ウェイカー`)).toBe('')
+  })
+  test('camouflage', async () => {
+    expect(SanitizeChatMessage(`/camouflage ＊ニャウ・ソード`)).toBe('')
     expect(SanitizeChatMessage(`/cmf ＊ニャウ・ソード`)).toBe('')
     expect(SanitizeChatMessage(`/mpal3 /cmf ＊アークマベヨネット`)).toBe('')
     expect(SanitizeChatMessage(`/mf1 all /cmf *エヴォルイクリスアルマティ /a やーっと帰ってゆっくりできる～♪`)).toBe(

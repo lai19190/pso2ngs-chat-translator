@@ -11,14 +11,15 @@ const regexs: Record<string, RegExp> = {
   mpalRegex: /^\/(mpal|mainpalette)\d+/,
   swpRegex: /^\/swp\d+/,
   spalRegex: /^\/(spal|sainpalette)\d+/,
-  ciRegex: /^\/ci\d{1,2}(?: (?:\d)?)?/,
+  costumeRegex: /^\/(costume|cs) \S+/,
+  ciRegex: /^\/ci\d{1,2}(?: (?:(?:\d+|t\d+|nw|s\d+(?:.\d+)?)\s?)*)?/,
   togeRegex: /^\/toge/,
   moyaRegex: /^\/moya/,
   photoRoomRegex: /^\/pr \w+ \d+/,
   channelRegex: /^\/(a|p|t)/,
   voRegex: /^\/vo\d+/,
   uioffRegex: /^\/uioff(?: \d+)?/,
-  cmfRegex: /^\/cmf \S+/,
+  camouflageRegex: /^\/(cmf|camouflage) \S+/,
 
   // subcommands
   nwRegex: /^nw/,
@@ -32,7 +33,7 @@ const regexs: Record<string, RegExp> = {
 }
 
 export function SanitizeChatMessage(chatMessage: string): string {
-  const facialKeys = new Set(['cfRegex', 'fcRegex', 'ceRegex'])
+  const facialRegexKeys = new Set(['cfRegex', 'fcRegex', 'ceRegex'])
   let facialCommandFound = false
 
   let hasMatch: boolean
@@ -48,7 +49,7 @@ export function SanitizeChatMessage(chatMessage: string): string {
         chatMessage = chatMessage.replace(regex, '').trim()
         hasMatch = true
 
-        if (facialKeys.has(key)) {
+        if (facialRegexKeys.has(key)) {
           facialCommandFound = true
         }
       }
