@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Chat Log Tailer 1`] = `
+exports[`Chat Log Tailer multi-line messages 1`] = `
 [
   {
     "group": "PUBLIC",
@@ -31,6 +31,41 @@ Multiple Line Message1",
 Message4",
     "name": "TEST4",
     "timestamp": "2025-04-25T01:00:00",
+  },
+]
+`;
+
+exports[`Chat Log Tailer spaces and special characters 1`] = `
+[
+  {
+    "group": "GUILD",
+    "id": "chat-message-636",
+    "message": " 彡⌒ ミ 
+(´･ω･｀) 禿は動じない ",
+    "name": "TEST1",
+    "timestamp": "2026-01-07T21:56:12",
+  },
+  {
+    "group": "GUILD",
+    "id": "chat-message-637",
+    "message": "   ⌒ 
+(´;ω;｀)　毛が失くなった・・",
+    "name": "TEST1",
+    "timestamp": "2026-01-07T21:56:14",
+  },
+]
+`;
+
+exports[`Chat Log Tailer こんばんは 1`] = `
+[
+  {
+    "group": "GUILD",
+    "id": "chat-message-60",
+    "message": "━┓┃　　　┃━╋ Ⅱ┃　　　╋
+　　┣┓　　┃┏╋ 　┣┓　　╋━┓
+━━┃┗━  ┃┗┛ 　┃┗━  ┃　┛",
+    "name": "Test1",
+    "timestamp": "2026-01-04T17:42:16",
   },
 ]
 `;

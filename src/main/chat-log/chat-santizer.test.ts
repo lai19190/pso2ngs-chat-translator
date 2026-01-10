@@ -30,8 +30,16 @@ describe('Chat Log Santizer', () => {
     expect(SanitizeChatMessage(`/cf all off sync`)).toBe('')
     expect(SanitizeChatMessage(`/a /cf all on`)).toBe('')
   })
+  test('ce', async () => {
+    expect(SanitizeChatMessage(`/ce5`)).toBe('')
+    expect(SanitizeChatMessage(`/ce11`)).toBe('')
+
+    expect(SanitizeChatMessage(`/ce5 test`)).toBe('test')
+    expect(SanitizeChatMessage(`/ce11 test`)).toBe('test')
+  })
   test('fc', async () => {
     expect(SanitizeChatMessage(`/fc`)).toBe('')
+    expect(SanitizeChatMessage(`/fc11`)).toBe('')
     expect(SanitizeChatMessage(`/fc5 s0 /ce on`)).toBe('')
     expect(SanitizeChatMessage(`/fc3 s1.8`)).toBe('')
     expect(SanitizeChatMessage(`/fc4 s30 /ceall /uioff 30 `)).toBe('')
