@@ -5,7 +5,18 @@ const config: Config = {
   ...createDefaultPreset({
     tsconfig: 'tsconfig.node.json'
   }),
-  testTimeout: 30 * 1000
+  testTimeout: 30 * 1000,
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.node.json',
+        diagnostics: {
+          ignoreCodes: ['TS151001']
+        }
+      }
+    ]
+  }
 }
 
 export default config

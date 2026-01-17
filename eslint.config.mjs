@@ -30,7 +30,8 @@ export default tseslint.config(
   eslintConfigPrettier,
   {
     rules: {
-      '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }]
+      '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }],
+      'no-irregular-whitespace': 'warn'
     }
   }
 )

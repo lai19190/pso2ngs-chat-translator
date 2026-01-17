@@ -8,6 +8,10 @@
     "moduleResolution":"bundler",
     "noUnusedLocals": false,
     "esModuleInterop":true,
-    "types": ["electron-vite/node", "jest"]
+    "types": ["electron-vite/node", "jest"],
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": true,
+    "isolatedModules": true
   }
 }

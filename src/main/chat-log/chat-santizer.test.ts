@@ -18,6 +18,7 @@ describe('Chat Log Santizer', () => {
     expect(SanitizeChatMessage(`/a /ci1 3 /mla wave ぶち殺しタイム終了～♪\nお疲れ様でした♪`)).toBe('ぶち殺しタイム終了～♪\nお疲れ様でした♪')
 
     expect(SanitizeChatMessage(`/cla khorshidakhtar rha chopchop /ci1 1 /toge /mn16 がおー`)).toBe('がおー')
+    expect(SanitizeChatMessage(`/la VoPerformance4 ss2.95`)).toBe('')
   })
   test('cf', async () => {
     expect(SanitizeChatMessage(`/cf`)).toBe('')
