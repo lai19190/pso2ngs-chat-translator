@@ -94,17 +94,17 @@ function LocalLLMSettings({ register }: { register: UseFormRegister<Settings> })
 
   return (
     <>
-      <SettingsSubtitle>{t('Translator.LocalTranslator.name')}</SettingsSubtitle>
+      <SettingsSubtitle>{t('Translator.LocalLLM.name')}</SettingsSubtitle>
       <SettingsColumn>
-        <label>{t('Translator.LocalTranslator.apiEndpoint')}</label>
+        <label>{t('Translator.LocalLLM.apiEndpoint')}</label>
         <input className="w-full rounded border px-1" placeholder="http://localhost:11434/v1" {...register('translation.localLLM.apiEndpoint')} />
       </SettingsColumn>
       <SettingsColumn>
-        <label>{t('Translator.LocalTranslator.model')}</label>
+        <label>{t('Translator.LocalLLM.model')}</label>
         <input className="w-full rounded border px-1" {...register('translation.localLLM.model')} />
       </SettingsColumn>
       <SettingsColumn>
-        <label>{t('Translator.LocalTranslator.apiKey')}</label>
+        <label>{t('Translator.LocalLLM.apiKey')}</label>
         <input className="w-full rounded border px-1" {...register('translation.localLLM.apiKey')} />
       </SettingsColumn>
     </>

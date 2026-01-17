@@ -49,7 +49,7 @@ export class LangChainTranslator implements Translator {
       case TranslatorType.LocalLLM: {
         const localLLMConfig = settings.translation.localLLM
         if (!localLLMConfig.apiEndpoint || !localLLMConfig.model) {
-          throw new Error('Translator.LocalTranslator.errorMissingConfig')
+          throw new Error('Translator.LocalLLM.errorMissingConfig')
         }
         return new ChatOpenAI({
           configuration: {
