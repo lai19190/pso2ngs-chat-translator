@@ -96,5 +96,12 @@
     "REPLY": "悄悄話",
     "GROUP": "群組",
     "SYSTEM": "系統"
+  },
+  "TitleBar": {
+    "pauseTranslation": "暫停翻譯",
+    "resumeTranslation": "恢復翻譯",
+    "settings": "設定",
+    "minimize": "最小化",
+    "close": "關閉"
   }
 }

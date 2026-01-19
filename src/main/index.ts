@@ -61,6 +61,14 @@ app.whenReady().then(async () => {
     const updateAvailable = latestVersion > currentVersion
     return { currentVersion, updateAvailable }
   })
+
+  ipcMain.handle('toggle-translation', () => {
+    return chatServiceController.togglePause()
+  })
+
+  ipcMain.handle('get-is-paused', () => {
+    return chatServiceController.getIsPaused()
+  })
 })
 
 app.on('window-all-closed', () => {

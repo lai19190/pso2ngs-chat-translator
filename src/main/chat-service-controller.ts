@@ -19,6 +19,7 @@ export class ChatServiceController {
   private chatHistory: ChatMessage[] = []
   private systemMessageCount = 0
   private queue = pLimit(1)
+  private isPaused = false
 
   constructor(mainWindow: BrowserWindow, settings: Settings) {
     this.mainWindow = mainWindow
@@ -81,6 +82,10 @@ export class ChatServiceController {
   }
 
   async notifyNewChatMessage(chatMessage: ChatMessage): Promise<void> {
+    // Skip translation if paused
+    if (this.isPaused) {
+      return
+    }
     try {
       const translatedChatMessage = await this.translator.translateToDestinationLanguage(chatMessage.name, chatMessage.message)
       chatMessage.translation = translatedChatMessage
@@ -125,5 +130,14 @@ export class ChatServiceController {
       throw new Error(`Translator not initialized`)
     }
     return this.translator.translateToSourceLanguage(message)
+  }
+
+  togglePause(): boolean {
+    this.isPaused = !this.isPaused
+    return this.isPaused
+  }
+
+  getIsPaused(): boolean {
+    return this.isPaused
   }
 }

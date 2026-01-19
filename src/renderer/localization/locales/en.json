@@ -96,5 +96,12 @@
     "REPLY": "REPLY",
     "GROUP": "GROUP",
     "SYSTEM": "SYSTEM"
+  },
+  "TitleBar": {
+    "pauseTranslation": "Pause Translation",
+    "resumeTranslation": "Resume Translation",
+    "settings": "Settings",
+    "minimize": "Minimize",
+    "close": "Close"
   }
 }

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { MainWindowContent } from '../../typings/types'
 
 export type TitleBarProps = {
@@ -8,6 +9,20 @@ export type TitleBarProps = {
 }
 
 export default function TitleBar({ content, setContent, onSaveSettingToStore }: TitleBarProps): JSX.Element {
+  const { t } = useTranslation()
+  const [isPaused, setIsPaused] = useState<boolean>(false)
+
+  useEffect(() => {
+    ;(async (): Promise<void> => {
+      const paused = await window.api.getIsPaused()
+      setIsPaused(paused)
+    })()
+  }, [])
+  const onClickPause = async (): Promise<void> => {
+    const newPausedState = await window.api.toggleTranslation()
+    setIsPaused(newPausedState)
+  }
+
   const onClickSettings = (): void => {
     switch (content) {
       case MainWindowContent.TRANSLATION:
@@ -34,7 +49,24 @@ export default function TitleBar({ content, setContent, onSaveSettingToStore }: 
       <button
         type="button"
         className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-inset"
+        onClick={onClickPause}
+        title={isPaused ? t('TitleBar.resumeTranslation') : t('TitleBar.pauseTranslation')}
+      >
+        {isPaused ? (
+          <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393" />
+          </svg>
+        ) : (
+          <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5" />
+          </svg>
+        )}
+      </button>
+      <button
+        type="button"
+        className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-inset"
         onClick={onClickSettings}
+        title={t('TitleBar.settings')}
       >
         <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
           <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
@@ -45,6 +77,7 @@ export default function TitleBar({ content, setContent, onSaveSettingToStore }: 
         type="button"
         className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-inset"
         onClick={onClickMinimize}
+        title={t('TitleBar.minimize')}
       >
         <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 12h12" />
@@ -54,6 +87,7 @@ export default function TitleBar({ content, setContent, onSaveSettingToStore }: 
         type="button"
         className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-inset"
         onClick={onClickClose}
+        title={t('TitleBar.close')}
       >
         <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />

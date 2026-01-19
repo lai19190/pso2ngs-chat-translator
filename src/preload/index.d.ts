@@ -12,6 +12,8 @@ declare global {
       onNewMessage: (callback: (message: ChatMessage | SystemMessage) => void) => () => void
       translateInputMessage: (message: string) => Promise<string>
       checkUpdate: () => Promise<AppUpdateInfo>
+      toggleTranslation: () => Promise<boolean>
+      getIsPaused: () => Promise<boolean>
     }
   }
 }

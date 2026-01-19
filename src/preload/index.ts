@@ -31,6 +31,12 @@ const api = {
   },
   checkUpdate: async (): Promise<AppUpdateInfo> => {
     return await ipcRenderer.invoke('check-update')
+  },
+  toggleTranslation: async (): Promise<boolean> => {
+    return await ipcRenderer.invoke('toggle-translation')
+  },
+  getIsPaused: async (): Promise<boolean> => {
+    return await ipcRenderer.invoke('get-is-paused')
   }
 }
 
