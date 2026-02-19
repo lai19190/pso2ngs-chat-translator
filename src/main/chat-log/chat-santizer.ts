@@ -1,7 +1,7 @@
 const regexs: Record<string, RegExp> = {
   // main commands start with /
   stampRegex: /^\/(st|stamp) \d+\s?/,
-  laRegex: /^\/(la|fla|mla|cla) \S+(?: (s|ss)\d+\.\d+)?(?: (ha|lha|rha) \w+)?\s?/,
+  laRegex: /^\/(la|fla|mla|cla) \S+(?: (s|ss)\d+\.\d+)?(?: (ha|lha|rha) \w+)*\s?/,
   cfRegex: /^\/cf\s?/,
   fcRegex: /^\/(face|fc)(\d+)?\s?/,
   ceRegex: /^\/ce(?:all|\d+)?\s?/,

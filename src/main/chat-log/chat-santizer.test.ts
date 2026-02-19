@@ -19,6 +19,9 @@ describe('Chat Log Santizer', () => {
 
     expect(SanitizeChatMessage(`/cla khorshidakhtar rha chopchop /ci1 1 /toge /mn16 がおー`)).toBe('がおー')
     expect(SanitizeChatMessage(`/la VoPerformance4 ss2.95`)).toBe('')
+
+    expect(SanitizeChatMessage(`/la kick3 ss0.00`)).toBe('')
+    expect(SanitizeChatMessage(`/la kick3 ss0.50`)).toBe('')
   })
   test('cf', async () => {
     expect(SanitizeChatMessage(`/cf`)).toBe('')
@@ -165,5 +168,10 @@ describe('Chat Log Santizer', () => {
     expect(SanitizeChatMessage(`/mla joy /ci2 3 /toge /mn15 {red}お{ora}疲{yel}れ{gre}様{blu}で{pur}し{vio}た{def}(ﾟ∀ﾟ)ノ`)).toBe(
       'お疲れ様でした(ﾟ∀ﾟ)ノ'
     )
+  })
+
+  test('complex commands', async () => {
+    expect(SanitizeChatMessage(`/mf8 all /fla winnerpose2+ rha halfopen2 lha openhand6 /ce on /fc12 on /cf on h25 v20 d-10`)).toBe('')
+    expect(SanitizeChatMessage(`/fla enomoto2 rha openandclose4 lha halfopen2 /ce2 on /cf h-20 v10 d20`)).toBe('')
   })
 })
