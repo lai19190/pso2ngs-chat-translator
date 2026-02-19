@@ -1,12 +1,12 @@
 import ChatWindow from './components/ChatWindow'
 import InputWindow from './components/InputWindow'
 import TitleBar from './components/TitleBar'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Activity } from 'react'
 import { MainWindowContent, ChatMessage, Settings, SystemMessage, fontSize, AppUpdateInfo } from '../typings/types'
 import SettingsPage from './components/SettingsPage'
 import i18next from 'i18next'
 
-export default function App(): JSX.Element {
+export default function App(): React.ReactElement {
   const [content, setContent] = useState<MainWindowContent>(MainWindowContent.TRANSLATION)
   const [hovered, setHovered] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
@@ -70,20 +70,20 @@ export default function App(): JSX.Element {
       onMouseLeave={onUnhovered}
     >
       <TitleBar content={content} setContent={setContent} onSaveSettingToStore={onSaveSettingToStore} />
-      {onTranslationWindow && (
-        <>
-          <ChatWindow
-            messages={messages}
-            hovered={hovered}
-            transliterationFontClassName={transliterationFontClassName}
-            showTransliteration={settings.translation.showTransliteration}
-            showTimestamp={settings.general.showTimestamp}
-            appUpdateInfo={appUpdateInfo}
-          />
-          {showAllWindows && <InputWindow inputValue={inputValue} setInputValue={setInputValue} />}
-        </>
-      )}
-      {onSettingsWindow && <SettingsPage settings={settings} setSettings={setSettings} />}
+      <Activity mode={onTranslationWindow ? 'visible' : 'hidden'}>
+        <ChatWindow
+          messages={messages}
+          hovered={hovered}
+          transliterationFontClassName={transliterationFontClassName}
+          showTransliteration={settings.translation.showTransliteration}
+          showTimestamp={settings.general.showTimestamp}
+          appUpdateInfo={appUpdateInfo}
+        />
+        {showAllWindows && <InputWindow inputValue={inputValue} setInputValue={setInputValue} />}
+      </Activity>
+      <Activity mode={onSettingsWindow ? 'visible' : 'hidden'}>
+        <SettingsPage settings={settings} setSettings={setSettings} />
+      </Activity>
     </div>
   )
 

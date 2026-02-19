@@ -5,7 +5,7 @@ export type InputWindowProps = {
   setInputValue: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function InputWindow({ inputValue, setInputValue }: InputWindowProps): JSX.Element {
+export default function InputWindow({ inputValue, setInputValue }: InputWindowProps): React.ReactElement {
   const { t } = useTranslation()
   const onInputKeyDown = async (event: React.KeyboardEvent<HTMLTextAreaElement>): Promise<void> => {
     if (event.key == 'Enter' && (event.altKey === true || event.shiftKey === true)) {

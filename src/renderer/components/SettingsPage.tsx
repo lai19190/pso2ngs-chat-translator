@@ -10,22 +10,28 @@ export type SettingsPageProps = {
 }
 
 // Reusable row component
-function SettingsRow({ children }: { children: ReactNode }): JSX.Element {
+function SettingsRow({ children }: { children: ReactNode }): React.ReactElement {
   return <div className="m-1 flex p-1">{children}</div>
 }
 
 // Reusable column component
-function SettingsColumn({ children }: { children: ReactNode }): JSX.Element {
+function SettingsColumn({ children }: { children: ReactNode }): React.ReactElement {
   return <div className="m-1 p-1">{children}</div>
 }
 
 // Reusable section subtitle component
-function SettingsSubtitle({ children }: { children: ReactNode }): JSX.Element {
+function SettingsSubtitle({ children }: { children: ReactNode }): React.ReactElement {
   return <div className="border-b">{children}</div>
 }
 
 // Reusable toggle switch component
-function ToggleSwitch({ defaultChecked, register }: { defaultChecked?: boolean; register: ReturnType<UseFormRegister<Settings>> }): JSX.Element {
+function ToggleSwitch({
+  defaultChecked,
+  register
+}: {
+  defaultChecked?: boolean
+  register: ReturnType<UseFormRegister<Settings>>
+}): React.ReactElement {
   return (
     <label className="inline-flex cursor-pointer items-center">
       <input type="checkbox" className="peer sr-only" defaultChecked={defaultChecked} {...register} />
@@ -35,7 +41,7 @@ function ToggleSwitch({ defaultChecked, register }: { defaultChecked?: boolean; 
 }
 
 // OpenAI Settings Section
-function OpenAISettings({ register }: { register: UseFormRegister<Settings> }): JSX.Element {
+function OpenAISettings({ register }: { register: UseFormRegister<Settings> }): React.ReactElement {
   const { t } = useTranslation()
   const openAIModelIDs = ['gpt-5-nano', 'gpt-5-mini', 'gpt-4.1-nano', 'gpt-4.1-mini']
 
@@ -62,7 +68,7 @@ function OpenAISettings({ register }: { register: UseFormRegister<Settings> }): 
 }
 
 // Gemini Settings Section
-function GeminiSettings({ register }: { register: UseFormRegister<Settings> }): JSX.Element {
+function GeminiSettings({ register }: { register: UseFormRegister<Settings> }): React.ReactElement {
   const { t } = useTranslation()
   const geminiModelIDs = ['gemini-2.5-flash-lite']
 
@@ -89,7 +95,7 @@ function GeminiSettings({ register }: { register: UseFormRegister<Settings> }): 
 }
 
 // LocalLLM Settings Section
-function LocalLLMSettings({ register }: { register: UseFormRegister<Settings> }): JSX.Element {
+function LocalLLMSettings({ register }: { register: UseFormRegister<Settings> }): React.ReactElement {
   const { t } = useTranslation()
 
   return (
@@ -112,7 +118,7 @@ function LocalLLMSettings({ register }: { register: UseFormRegister<Settings> })
 }
 
 // XAI Settings Section
-function XAISettings({ register }: { register: UseFormRegister<Settings> }): JSX.Element {
+function XAISettings({ register }: { register: UseFormRegister<Settings> }): React.ReactElement {
   const { t } = useTranslation()
   const xaiModelIDs = ['grok-4-1-fast-non-reasoning', 'grok-4-fast-non-reasoning']
 
@@ -139,7 +145,7 @@ function XAISettings({ register }: { register: UseFormRegister<Settings> }): JSX
 }
 
 // DeepL Settings Section
-function DeepLSettings({ register }: { register: UseFormRegister<Settings> }): JSX.Element {
+function DeepLSettings({ register }: { register: UseFormRegister<Settings> }): React.ReactElement {
   const { t } = useTranslation()
 
   return (
@@ -153,7 +159,7 @@ function DeepLSettings({ register }: { register: UseFormRegister<Settings> }): J
   )
 }
 
-export default function SettingsPage({ settings, setSettings }: SettingsPageProps): JSX.Element {
+export default function SettingsPage({ settings, setSettings }: SettingsPageProps): React.ReactElement {
   const {
     register,
     reset,

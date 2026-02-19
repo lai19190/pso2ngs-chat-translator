@@ -8,7 +8,7 @@ export type TitleBarProps = {
   onSaveSettingToStore: () => void
 }
 
-export default function TitleBar({ content, setContent, onSaveSettingToStore }: TitleBarProps): JSX.Element {
+export default function TitleBar({ content, setContent, onSaveSettingToStore }: TitleBarProps): React.ReactElement {
   const { t } = useTranslation()
   const [isPaused, setIsPaused] = useState<boolean>(false)
 

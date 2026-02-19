@@ -28,7 +28,7 @@ export default function ChatWindow({
   showTransliteration,
   showTimestamp,
   appUpdateInfo
-}: ChatWindowProps): JSX.Element {
+}: ChatWindowProps): React.ReactElement {
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
   const chatWindowDivRef = useRef<HTMLDivElement | null>(null)
   const { t } = useTranslation()
@@ -81,7 +81,7 @@ export default function ChatWindow({
     return 'group' in message && message.group !== undefined
   }
 
-  function renderChatMessage(message: ChatMessage): JSX.Element {
+  function renderChatMessage(message: ChatMessage): React.ReactElement {
     const formattedTime = showTimestamp ? formatTimestamp(message.timestamp) : null
     return (
       <span key={message.id} style={{ color: chatColorMap.get(message.group) }} className="block pb-1 whitespace-pre-wrap">
@@ -105,7 +105,7 @@ export default function ChatWindow({
     return `${hours}:${minutes}`
   }
 
-  function renderSystemMessage(systemMessage: SystemMessage): JSX.Element {
+  function renderSystemMessage(systemMessage: SystemMessage): React.ReactElement {
     return (
       <span key={systemMessage.id} style={{ color: '#D0F0F0' }} className="block pb-1">
         [{t('ChatGroup.SYSTEM')}] {t(systemMessage.message)} <br />
@@ -114,7 +114,7 @@ export default function ChatWindow({
     )
   }
 
-  function parseTransliteration(transliteration: string): string | JSX.Element | JSX.Element[] {
+  function parseTransliteration(transliteration: string): string | React.ReactElement | React.ReactElement[] {
     // replace all new lines with <br /> tag
     return parse(transliteration, {
       replace(domNode) {
