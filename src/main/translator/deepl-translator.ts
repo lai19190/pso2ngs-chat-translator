@@ -1,6 +1,7 @@
 import * as deepl from 'deepl-node'
 import { Translator } from '../../typings/interface'
 import { Language, Settings } from '../../typings/types'
+import { DEFAULT_REQUEST_TIMEOUT } from '../../typings/constants'
 
 export class DeepLTranslator implements Translator {
   private translator: deepl.Translator
@@ -11,7 +12,7 @@ export class DeepLTranslator implements Translator {
     if (!settings.translation.deepl?.apiKey) {
       throw new Error('Translator.DeepL.errorMissingConfig')
     }
-    this.translator = new deepl.Translator(settings.translation.deepl.apiKey)
+    this.translator = new deepl.Translator(settings.translation.deepl.apiKey, { minTimeout: DEFAULT_REQUEST_TIMEOUT })
     this.sourceLanguage = settings.translation.sourceLanguage
     this.destinationLanguage = settings.translation.destinationLanguage
   }

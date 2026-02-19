@@ -5,6 +5,7 @@ import { Translator } from '../../typings/interface'
 import { ChatMessage, Language, Settings, TranslatorMessageInput, TranslatorType } from '../../typings/types'
 import { DEFAULT_REQUEST_TIMEOUT, DEFAULT_SYSTEM_PROMPT, TranslatorOutputSchema } from '../../typings/constants'
 import { GeneratePromptWithChatHistory } from './utils'
+import { ChatXAI } from '@langchain/xai'
 
 export class LangChainTranslator implements Translator {
   private sourceLanguage: Language
@@ -40,10 +41,14 @@ export class LangChainTranslator implements Translator {
         if (!geminiConfig.apiKey || !geminiConfig.model) {
           throw new Error('Translator.Gemini.errorMissingConfig')
         }
-        return new ChatGoogleGenerativeAI({
+        const geminiModel = new ChatGoogleGenerativeAI({
           apiKey: geminiConfig.apiKey,
           model: geminiConfig.model
         })
+        geminiModel.withConfig({
+          timeout: DEFAULT_REQUEST_TIMEOUT
+        })
+        return geminiModel
       }
 
       case TranslatorType.LocalLLM: {
@@ -66,14 +71,14 @@ export class LangChainTranslator implements Translator {
         if (!xaiConfig.apiKey || !xaiConfig.model) {
           throw new Error('Translator.XAI.errorMissingConfig')
         }
-        return new ChatOpenAI({
-          configuration: {
-            baseURL: 'https://api.x.ai/v1'
-          },
+        const xaiModel = new ChatXAI({
           apiKey: xaiConfig.apiKey,
-          model: xaiConfig.model,
+          model: xaiConfig.model
+        })
+        xaiModel.withConfig({
           timeout: DEFAULT_REQUEST_TIMEOUT
         })
+        return xaiModel
       }
 
       default:
