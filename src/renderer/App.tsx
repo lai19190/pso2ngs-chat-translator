@@ -9,10 +9,10 @@ import i18next from 'i18next'
 export default function App(): React.ReactElement {
   const [content, setContent] = useState<MainWindowContent>(MainWindowContent.TRANSLATION)
   const [hovered, setHovered] = useState<boolean>(false)
-  const [inputValue, setInputValue] = useState<string>('')
   const [messages, setMessages] = useState<(ChatMessage | SystemMessage)[]>()
   const [settings, setSettings] = useState<Settings>()
   const [appUpdateInfo, setAppUpdateInfo] = useState<AppUpdateInfo | null>(null)
+
   const { systemFontClassName, transliterationFontClassName } = getFontSize(settings)
 
   let hoveredTimeout: NodeJS.Timeout | null = null
@@ -79,7 +79,9 @@ export default function App(): React.ReactElement {
           showTimestamp={settings.general.showTimestamp}
           appUpdateInfo={appUpdateInfo}
         />
-        {showAllWindows && <InputWindow inputValue={inputValue} setInputValue={setInputValue} />}
+        <Activity mode={showAllWindows ? 'visible' : 'hidden'}>
+          <InputWindow />
+        </Activity>
       </Activity>
       <Activity mode={onSettingsWindow ? 'visible' : 'hidden'}>
         <SettingsPage settings={settings} setSettings={setSettings} />

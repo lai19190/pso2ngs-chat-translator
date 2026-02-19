@@ -1,11 +1,8 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export type InputWindowProps = {
-  inputValue: string
-  setInputValue: React.Dispatch<React.SetStateAction<string>>
-}
-
-export default function InputWindow({ inputValue, setInputValue }: InputWindowProps): React.ReactElement {
+export default function InputWindow(): React.ReactElement {
+  const [inputValue, setInputValue] = useState<string>('')
   const { t } = useTranslation()
   const onInputKeyDown = async (event: React.KeyboardEvent<HTMLTextAreaElement>): Promise<void> => {
     if (event.key == 'Enter' && (event.altKey === true || event.shiftKey === true)) {
