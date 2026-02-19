@@ -122,10 +122,15 @@ export enum TranslatorType {
   XAI = 'XAI'
 }
 
-export type TranslatorMessageInput = {
+export type TranslatorUserMessageInput = {
   speakerName: string
-  targetLanguage: Language
   message: string
+  targetLanguage: Language
+}
+
+export type TranslatorUserReplyMessageInput = {
+  message: string
+  targetLanguage: Language
 }
 
 export type AppUpdateInfo = {

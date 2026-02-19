@@ -2,8 +2,8 @@ import { ChatOpenAI } from '@langchain/openai'
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai'
 import { BaseChatModel } from '@langchain/core/language_models/chat_models'
 import { Translator } from '../../typings/interface'
-import { ChatMessage, Language, Settings, TranslatorMessageInput, TranslatorType } from '../../typings/types'
-import { DEFAULT_REQUEST_TIMEOUT, DEFAULT_SYSTEM_PROMPT, TranslatorOutputSchema } from '../../typings/constants'
+import { ChatMessage, Language, Settings, TranslatorUserReplyMessageInput, TranslatorType, TranslatorUserMessageInput } from '../../typings/types'
+import { DEFAULT_REQUEST_TIMEOUT, SYSTEM_PROMPT, SYSTEM_PROMPT_REPLY, TranslatorOutputSchema } from '../../typings/constants'
 import { GeneratePromptWithChatHistory } from './utils'
 import { ChatXAI } from '@langchain/xai'
 
@@ -87,21 +87,33 @@ export class LangChainTranslator implements Translator {
   }
 
   async translateToDestinationLanguage(name: string, message: string): Promise<string> {
-    return await this.translate(name, message, this.destinationLanguage)
+    const translatorInput: TranslatorUserMessageInput = {
+      speakerName: name,
+      message,
+      targetLanguage: this.destinationLanguage
+    }
+
+    const systemPrompt = GeneratePromptWithChatHistory(SYSTEM_PROMPT, this.chatHistory)
+
+    const structuredLlm = this.chatModel.withStructuredOutput(TranslatorOutputSchema, {
+      name: 'translator'
+    })
+
+    const response = await structuredLlm.invoke([
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: JSON.stringify(translatorInput) }
+    ])
+
+    return response.translatedMessage
   }
 
   async translateToSourceLanguage(message: string): Promise<string> {
-    return await this.translate('REPLY', message, this.sourceLanguage)
-  }
-
-  private async translate(speakerName: string, message: string, targetLanguage: Language): Promise<string> {
-    const translatorInput: TranslatorMessageInput = {
-      speakerName,
+    const translatorInput: TranslatorUserReplyMessageInput = {
       message,
-      targetLanguage
+      targetLanguage: this.sourceLanguage
     }
 
-    const systemPrompt = GeneratePromptWithChatHistory(DEFAULT_SYSTEM_PROMPT, this.chatHistory)
+    const systemPrompt = GeneratePromptWithChatHistory(SYSTEM_PROMPT_REPLY, this.chatHistory)
 
     const structuredLlm = this.chatModel.withStructuredOutput(TranslatorOutputSchema, {
       name: 'translator'
