@@ -71,6 +71,7 @@ describe('Chat Log Santizer', () => {
   })
   test('mpal', async () => {
     expect(SanitizeChatMessage(`/mpal2`)).toBe('')
+    expect(SanitizeChatMessage(`/mpal2 /subpalette6`)).toBe('')
     expect(SanitizeChatMessage(`/mpal1 /a 復活しました、有難う！`)).toBe('復活しました、有難う！')
   })
   test('swp', async () => {
@@ -78,6 +79,7 @@ describe('Chat Log Santizer', () => {
     expect(SanitizeChatMessage(`/swp1 /mf5 all /mn12 ただいま戻りましたー`)).toBe('ただいま戻りましたー')
   })
   test('spal', async () => {
+    expect(SanitizeChatMessage(`/subpalette6`)).toBe('')
     expect(SanitizeChatMessage(`/spal2`)).toBe('')
     expect(SanitizeChatMessage(`/spal1 /mpal1 /vo12`)).toBe('')
     expect(SanitizeChatMessage(`/mpal1 /spal7 /ms21 /mf7 all`)).toBe('')

@@ -10,7 +10,7 @@ const regexs: Record<string, RegExp> = {
   mfRegex: /^\/(mf|myfashion)\d+(?: all)?\s?/,
   mpalRegex: /^\/(mpal|mainpalette)\d+\s?/,
   swpRegex: /^\/swp\d+\s?/,
-  spalRegex: /^\/(spal|sainpalette)\d+\s?/,
+  spalRegex: /^\/(spal|subpalette)\d+\s?/,
   costumeRegex: /^\/(costume|cs) \S+\s?/,
   ciRegex: /^\/ci\d+(?: (?:(?:\d+|t\d+|nw|s\d+(?:.\d+)?)\s?)*)?\s?/,
   togeRegex: /^\/toge\s?/,
