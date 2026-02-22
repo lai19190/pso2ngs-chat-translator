@@ -2,7 +2,15 @@ import { ChatOpenAI } from '@langchain/openai'
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai'
 import { BaseChatModel } from '@langchain/core/language_models/chat_models'
 import { Translator } from '../../typings/interface'
-import { ChatMessage, Language, Settings, TranslatorUserReplyMessageInput, TranslatorType, TranslatorUserMessageInput } from '../../typings/types'
+import {
+  ChatMessage,
+  Language,
+  Settings,
+  TranslatorUserReplyMessageInput,
+  TranslatorType,
+  TranslatorUserMessageInput,
+  LanguageNames
+} from '../../typings/types'
 import { DEFAULT_REQUEST_TIMEOUT, SYSTEM_PROMPT, SYSTEM_PROMPT_REPLY, TranslatorOutputSchema } from '../../typings/constants'
 import { GeneratePromptWithChatHistory } from './utils'
 import { ChatXAI } from '@langchain/xai'
@@ -90,7 +98,7 @@ export class LangChainTranslator implements Translator {
     const translatorInput: TranslatorUserMessageInput = {
       speakerName: name,
       message,
-      targetLanguage: this.destinationLanguage
+      targetLanguage: `${LanguageNames[this.destinationLanguage]}(${this.destinationLanguage})`
     }
 
     const systemPrompt = GeneratePromptWithChatHistory(SYSTEM_PROMPT, this.chatHistory)
@@ -110,7 +118,7 @@ export class LangChainTranslator implements Translator {
   async translateToSourceLanguage(message: string): Promise<string> {
     const translatorInput: TranslatorUserReplyMessageInput = {
       message,
-      targetLanguage: this.sourceLanguage
+      targetLanguage: `${LanguageNames[this.sourceLanguage]}(${this.sourceLanguage})`
     }
 
     const systemPrompt = GeneratePromptWithChatHistory(SYSTEM_PROMPT_REPLY, this.chatHistory)

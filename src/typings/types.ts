@@ -113,6 +113,22 @@ export enum Language {
   Tagalog = 'tl'
 }
 
+export const LanguageNames: Record<Language, string> = {
+  [Language.English]: 'English',
+  [Language.Japanese]: 'Japanese',
+  [Language.TraditionalChinese]: 'Traditional Chinese',
+  [Language.SimplifiedChinese]: 'Simplified Chinese',
+  [Language.Spanish]: 'Spanish',
+  [Language.Portuguese]: 'Portuguese',
+  [Language.Korean]: 'Korean',
+  [Language.French]: 'French',
+  [Language.German]: 'German',
+  [Language.Italian]: 'Italian',
+  [Language.Russian]: 'Russian',
+  [Language.Indonesian]: 'Indonesian',
+  [Language.Tagalog]: 'Tagalog'
+}
+
 export enum TranslatorType {
   GoogleTranslate = 'GoogleTranslate',
   DeepL = 'DeepL',
@@ -125,12 +141,12 @@ export enum TranslatorType {
 export type TranslatorUserMessageInput = {
   speakerName: string
   message: string
-  targetLanguage: Language
+  targetLanguage: string
 }
 
 export type TranslatorUserReplyMessageInput = {
   message: string
-  targetLanguage: Language
+  targetLanguage: string
 }
 
 export type AppUpdateInfo = {
