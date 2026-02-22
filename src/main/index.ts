@@ -11,8 +11,10 @@ import { installExtension, REACT_DEVELOPER_TOOLS } from 'electron-devtools-insta
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(async () => {
-  await installExtension(REACT_DEVELOPER_TOOLS, { loadExtensionOptions: { allowFileAccess: true } })
-  await launchExtensionBackgroundWorkers()
+  if (is.dev) {
+    await installExtension(REACT_DEVELOPER_TOOLS, { loadExtensionOptions: { allowFileAccess: true } })
+    await launchExtensionBackgroundWorkers()
+  }
 
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
