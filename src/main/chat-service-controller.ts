@@ -7,7 +7,8 @@ import { kuroshiro, SetupKuroshiro } from './translator/kuroshiro'
 import { GoogleTranslator } from './translator/google-translator'
 import { LangChainTranslator } from './translator/langchain-translator'
 import { DeepLTranslator } from './translator/deepl-translator'
-import pLimit from 'p-limit'
+import PQueue from 'p-queue'
+import { DEFAULT_REQUEST_TIMEOUT } from '../typings/constants'
 
 export class ChatServiceController {
   private mainWindow: BrowserWindow
@@ -18,7 +19,7 @@ export class ChatServiceController {
 
   private chatHistory: ChatMessage[] = []
   private systemMessageCount = 0
-  private queue = pLimit(1)
+  private queue = new PQueue({ concurrency: 1, timeout: DEFAULT_REQUEST_TIMEOUT })
   private isPaused = false
 
   constructor(mainWindow: BrowserWindow, settings: Settings) {
@@ -38,7 +39,11 @@ export class ChatServiceController {
     try {
       const chatLogTailer = new ChatLogTailer(settings)
       chatLogTailer.on('new-message', async (chatMessage: ChatMessage) => {
-        await this.queue(() => this.notifyNewChatMessage(chatMessage))
+        try {
+          await this.queue.add(() => this.notifyNewChatMessage(chatMessage))
+        } catch (error) {
+          this.notifyNewSystemMessage('Messages.errorTranslating', error as Error)
+        }
       })
       let translator: Translator
       switch (settings.translation.translator) {

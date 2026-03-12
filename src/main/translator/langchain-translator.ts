@@ -39,8 +39,7 @@ export class LangChainTranslator implements Translator {
         }
         return new ChatOpenAI({
           apiKey: openAIConfig.apiKey,
-          model: openAIConfig.model,
-          timeout: DEFAULT_REQUEST_TIMEOUT
+          model: openAIConfig.model
         })
       }
 
@@ -52,9 +51,6 @@ export class LangChainTranslator implements Translator {
         const geminiModel = new ChatGoogleGenerativeAI({
           apiKey: geminiConfig.apiKey,
           model: geminiConfig.model
-        })
-        geminiModel.withConfig({
-          timeout: DEFAULT_REQUEST_TIMEOUT
         })
         return geminiModel
       }
@@ -69,8 +65,7 @@ export class LangChainTranslator implements Translator {
             baseURL: localLLMConfig.apiEndpoint
           },
           apiKey: localLLMConfig.apiKey || 'not-needed',
-          model: localLLMConfig.model,
-          timeout: DEFAULT_REQUEST_TIMEOUT
+          model: localLLMConfig.model
         })
       }
 
@@ -82,9 +77,6 @@ export class LangChainTranslator implements Translator {
         const xaiModel = new ChatXAI({
           apiKey: xaiConfig.apiKey,
           model: xaiConfig.model
-        })
-        xaiModel.withConfig({
-          timeout: DEFAULT_REQUEST_TIMEOUT
         })
         return xaiModel
       }
@@ -107,10 +99,13 @@ export class LangChainTranslator implements Translator {
       name: 'translator'
     })
 
-    const response = await structuredLlm.invoke([
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: JSON.stringify(translatorInput) }
-    ])
+    const response = await structuredLlm.invoke(
+      [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: JSON.stringify(translatorInput) }
+      ],
+      { timeout: DEFAULT_REQUEST_TIMEOUT }
+    )
 
     return response.translatedMessage
   }
@@ -127,10 +122,13 @@ export class LangChainTranslator implements Translator {
       name: 'translator'
     })
 
-    const response = await structuredLlm.invoke([
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: JSON.stringify(translatorInput) }
-    ])
+    const response = await structuredLlm.invoke(
+      [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: JSON.stringify(translatorInput) }
+      ],
+      { timeout: DEFAULT_REQUEST_TIMEOUT }
+    )
 
     return response.translatedMessage
   }
