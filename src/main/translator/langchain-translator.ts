@@ -1,5 +1,6 @@
 import { ChatOpenAI } from '@langchain/openai'
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai'
+import { HarmCategory, HarmBlockThreshold } from '@google/generative-ai'
 import { BaseChatModel } from '@langchain/core/language_models/chat_models'
 import { Translator } from '../../typings/interface'
 import {
@@ -39,7 +40,10 @@ export class LangChainTranslator implements Translator {
         }
         return new ChatOpenAI({
           apiKey: openAIConfig.apiKey,
-          model: openAIConfig.model
+          model: openAIConfig.model,
+          modelKwargs: {
+            moderation: false
+          }
         })
       }
 
@@ -50,7 +54,17 @@ export class LangChainTranslator implements Translator {
         }
         const geminiModel = new ChatGoogleGenerativeAI({
           apiKey: geminiConfig.apiKey,
-          model: geminiConfig.model
+          model: geminiConfig.model,
+          safetySettings: [
+            {
+              category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+              threshold: HarmBlockThreshold.BLOCK_NONE
+            },
+            {
+              category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+              threshold: HarmBlockThreshold.BLOCK_NONE
+            }
+          ]
         })
         return geminiModel
       }
