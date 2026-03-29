@@ -1,7 +1,8 @@
 import Kuroshiro from 'kuroshiro'
-import KuromojiAnalyzer from 'kuroshiro-analyzer-kuromoji'
+import { SudachiAnalyzer } from './sudachi-analyzer'
 
 export const kuroshiro = new Kuroshiro()
 export async function SetupKuroshiro(): Promise<void> {
-  await kuroshiro.init(new KuromojiAnalyzer())
+  const analyzer = new SudachiAnalyzer()
+  await kuroshiro.init(analyzer)
 }

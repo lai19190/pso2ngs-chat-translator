@@ -2,7 +2,7 @@
 /* eslint-disable */
 declare class Kuroshiro {
   constructor()
-  init(_analyzer: any): Promise<void>
+  init(_analyzer: KuroshiroAnalyzer): Promise<void>
   convert(
     str: string,
     options?: {
@@ -30,16 +30,30 @@ declare class Kuroshiro {
   }
 }
 
-// to avoid mistakenly treating d.ts as js by ESLint.
-/* eslint-disable */
-declare class KuromojiAnalyzer {
-  constructor(dictPath?: { dictPath: string })
-  init(): Promise<void>
-  parse(str: string): Promise<any>
+type KuroshiroToken = {
+  surface_form: string
+  pos: string
+  pos_detail_1: string
+  pos_detail_2: string
+  pos_detail_3: string
+  conjugated_type: string
+  conjugated_form: string
+  basic_form: string
+  reading: string
+  pronunciation: string
+  verbose?: {
+    word_id: number
+    word_type: string
+    word_position: number
+  }
 }
 
-declare module 'kuroshiro-analyzer-kuromoji' {
-  export = KuromojiAnalyzer
+// to avoid mistakenly treating d.ts as js by ESLint.
+/* eslint-disable */
+declare class KuroshiroAnalyzer {
+  constructor(dictPath?: { dictPath: string })
+  init(): Promise<void>
+  parse(str: string): Promise<KuroshiroToken[]>
 }
 
 declare module 'kuroshiro' {
