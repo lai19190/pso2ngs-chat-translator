@@ -1,4 +1,4 @@
-import { franc } from 'franc'
+import { eld } from 'eld/large'
 import { ChatMessage, Settings, TranslatorType, SystemMessage } from '../typings/types'
 import { ChatLogTailer } from './chat-log/chat-log-tailer'
 import { BrowserWindow } from 'electron'
@@ -92,11 +92,18 @@ export class ChatServiceController {
       return
     }
     try {
-      const translatedChatMessage = await this.translator.translateToDestinationLanguage(chatMessage.name, chatMessage.message)
+      const detectedLanguageResult = eld.detect(chatMessage.message)
+      let translatedChatMessage = chatMessage.message
+      // Only translate if the detected language is different from the user's selected destination language
+      // or if the detection is not reliable
+      // handle zh-CN and zh-TW cases for Chinese
+      if (!detectedLanguageResult.isReliable() || !this.settings.translation.destinationLanguage.startsWith(detectedLanguageResult.language)) {
+        translatedChatMessage = await this.translator.translateToDestinationLanguage(chatMessage.name, chatMessage.message)
+      }
       chatMessage.translation = translatedChatMessage
+
       if (this.settings.translation.showTransliteration) {
-        const detectedLanguage = franc(chatMessage.message, { minLength: 1 })
-        if (detectedLanguage === 'jpn') {
+        if (detectedLanguageResult.language === 'ja') {
           // add transliteration to the message
           const transliteration = await kuroshiro.convert(chatMessage.message, {
             mode: this.settings.translation.transliterationType,
@@ -108,6 +115,7 @@ export class ChatServiceController {
           chatMessage.transliteration = chatMessage.message
         }
       }
+
       this.mainWindow.webContents.send('new-message', chatMessage)
 
       // store the chat message in history, limit to 10 messages

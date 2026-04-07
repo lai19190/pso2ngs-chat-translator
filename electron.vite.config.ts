@@ -5,7 +5,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin({ exclude: ['p-queue'] })]
+    plugins: [externalizeDepsPlugin({ exclude: ['p-queue', 'eld'] })]
   },
   preload: {
     plugins: [externalizeDepsPlugin()]
