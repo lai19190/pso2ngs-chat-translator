@@ -141,6 +141,7 @@ export enum TranslatorType {
 export type TranslatorUserMessageInput = {
   speakerName: string
   message: string
+  group: ChatGroup
   targetLanguage: string
 }
 

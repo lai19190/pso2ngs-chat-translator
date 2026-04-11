@@ -1,6 +1,6 @@
 import * as deepl from 'deepl-node'
 import { Translator } from '../../typings/interface'
-import { Language, Settings } from '../../typings/types'
+import { ChatMessage, Language, Settings } from '../../typings/types'
 import { DEFAULT_REQUEST_TIMEOUT } from '../../typings/constants'
 
 export class DeepLTranslator implements Translator {
@@ -17,8 +17,8 @@ export class DeepLTranslator implements Translator {
     this.destinationLanguage = settings.translation.destinationLanguage
   }
 
-  async translateToDestinationLanguage(_name: string, message: string): Promise<string> {
-    const result = await this.translator.translateText(message, null, this.mapToDeeplLanguageCode(this.destinationLanguage))
+  async translateToDestinationLanguage(chatMessage: ChatMessage): Promise<string> {
+    const result = await this.translator.translateText(chatMessage.message, null, this.mapToDeeplLanguageCode(this.destinationLanguage))
     return result.text
   }
 

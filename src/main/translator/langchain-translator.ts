@@ -100,10 +100,11 @@ export class LangChainTranslator implements Translator {
     }
   }
 
-  async translateToDestinationLanguage(name: string, message: string): Promise<string> {
+  async translateToDestinationLanguage(chatMessage: ChatMessage): Promise<string> {
     const translatorInput: TranslatorUserMessageInput = {
-      speakerName: name,
-      message,
+      speakerName: chatMessage.name,
+      message: chatMessage.message,
+      group: chatMessage.group,
       targetLanguage: `${LanguageNames[this.destinationLanguage]}(${this.destinationLanguage})`
     }
 

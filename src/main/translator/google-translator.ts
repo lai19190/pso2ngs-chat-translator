@@ -1,6 +1,6 @@
 import { DEFAULT_REQUEST_TIMEOUT } from '../../typings/constants'
 import { Translator } from '../../typings/interface'
-import { Language, Settings } from '../../typings/types'
+import { ChatMessage, Language, Settings } from '../../typings/types'
 
 export class GoogleTranslator implements Translator {
   private sourceLanguage: Language
@@ -12,8 +12,8 @@ export class GoogleTranslator implements Translator {
     this.destinationLanguage = settings.translation.destinationLanguage
   }
 
-  async translateToDestinationLanguage(_name: string, message: string): Promise<string> {
-    const translateURL = `${this.translationEndpoint}?client=gtx&dt=t&sl=${this.sourceLanguage}&tl=${this.destinationLanguage}&q=${encodeURIComponent(message)}`
+  async translateToDestinationLanguage(chatMessage: ChatMessage): Promise<string> {
+    const translateURL = `${this.translationEndpoint}?client=gtx&dt=t&sl=${this.sourceLanguage}&tl=${this.destinationLanguage}&q=${encodeURIComponent(chatMessage.message)}`
     const translationResponse = await fetch(translateURL, { signal: AbortSignal.timeout(DEFAULT_REQUEST_TIMEOUT) })
     const translationJson = JSON.parse(await translationResponse.text())
     return translationJson[0][0][0]

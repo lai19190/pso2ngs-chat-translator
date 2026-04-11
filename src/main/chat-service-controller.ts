@@ -98,7 +98,7 @@ export class ChatServiceController {
       // or if the detection is not reliable
       // handle zh-CN and zh-TW cases for Chinese
       if (!detectedLanguageResult.isReliable() || !this.settings.translation.destinationLanguage.startsWith(detectedLanguageResult.language)) {
-        translatedChatMessage = await this.translator.translateToDestinationLanguage(chatMessage.name, chatMessage.message)
+        translatedChatMessage = await this.translator.translateToDestinationLanguage(chatMessage)
       }
       chatMessage.translation = translatedChatMessage
 
