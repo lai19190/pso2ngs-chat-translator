@@ -20,4 +20,4 @@ Your goal is to accurately convey the meaning and nuances of the original text w
 - Word choices should be simple and easy to understand.
 `.trim()
 
-export const DEFAULT_REQUEST_TIMEOUT = 5000
+export const DEFAULT_REQUEST_TIMEOUT = 10000
