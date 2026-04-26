@@ -40,10 +40,7 @@ export class LangChainTranslator implements Translator {
         }
         return new ChatOpenAI({
           apiKey: openAIConfig.apiKey,
-          model: openAIConfig.model,
-          modelKwargs: {
-            moderation: false
-          }
+          model: openAIConfig.model
         })
       }
 
