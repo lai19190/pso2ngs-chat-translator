@@ -1,11 +1,12 @@
+import { AxiosError } from 'axios'
 import { DEFAULT_REQUEST_TIMEOUT } from '../../typings/constants'
 import { Translator } from '../../typings/interface'
 import { ChatMessage, Language, Settings } from '../../typings/types'
+import { googletrans } from 'googletrans'
 
 export class GoogleTranslator implements Translator {
   private sourceLanguage: Language
   private destinationLanguage: Language
-  private translationEndpoint = `https://translate.googleapis.com/translate_a/single`
 
   constructor(settings: Settings) {
     this.sourceLanguage = settings.translation.sourceLanguage
@@ -13,16 +14,24 @@ export class GoogleTranslator implements Translator {
   }
 
   async translateToDestinationLanguage(chatMessage: ChatMessage): Promise<string> {
-    const translateURL = `${this.translationEndpoint}?client=gtx&dt=t&sl=${this.sourceLanguage}&tl=${this.destinationLanguage}&q=${encodeURIComponent(chatMessage.message)}`
-    const translationResponse = await fetch(translateURL, { signal: AbortSignal.timeout(DEFAULT_REQUEST_TIMEOUT) })
-    const translationJson = JSON.parse(await translationResponse.text())
-    return translationJson[0][0][0]
+    return this.translate(chatMessage.message, this.sourceLanguage, this.destinationLanguage)
   }
 
   async translateToSourceLanguage(message: string): Promise<string> {
-    const translateURL = `${this.translationEndpoint}?client=gtx&dt=t&sl=${this.destinationLanguage}&tl=${this.sourceLanguage}&q=${encodeURIComponent(message)}`
-    const translationResponse = await fetch(translateURL, { signal: AbortSignal.timeout(DEFAULT_REQUEST_TIMEOUT) })
-    const translationJson = JSON.parse(await translationResponse.text())
-    return translationJson[0][0][0]
+    return this.translate(message, this.destinationLanguage, this.sourceLanguage)
+  }
+
+  private async translate(message: string, sourceLanguage: Language, destinationLanguage: Language): Promise<string> {
+    try {
+      const result = await googletrans(message, {
+        from: sourceLanguage,
+        to: destinationLanguage,
+        signal: AbortSignal.timeout(DEFAULT_REQUEST_TIMEOUT)
+      })
+      return result.text
+    } catch (error: unknown) {
+      const axiosError = error as AxiosError
+      throw new Error(`Google Translate request failed (${axiosError.response?.status})`)
+    }
   }
 }
