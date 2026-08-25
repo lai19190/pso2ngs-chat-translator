@@ -10,6 +10,7 @@ Your goal is to accurately convey the meaning and nuances of the original text w
 - Translate naturally and casually. Keep it simple. Refer to chat history for context.
 - word choices should be simple and easy to understand.
 - If the whole message is already written in the target language or untranslatable, return it unchanged.
+- Produce only the translation, without any additional explanations or commentary.
 `.trim()
 
 export const SYSTEM_PROMPT_REPLY = `
@@ -18,6 +19,7 @@ Your goal is to accurately convey the meaning and nuances of the original text w
 - Always translate the message into the target language, even if it is a single word or very short phrase.
 - Translate naturally and casually. Keep it simple. Refer to chat history for context.
 - Word choices should be simple and easy to understand.
+- Produce only the translation, without any additional explanations or commentary.
 `.trim()
 
-export const DEFAULT_REQUEST_TIMEOUT = 10000
+export const DEFAULT_REQUEST_TIMEOUT = 15000
