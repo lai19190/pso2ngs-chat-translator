@@ -14,18 +14,18 @@ export class GoogleTranslator implements Translator {
   }
 
   async translateToDestinationLanguage(chatMessage: ChatMessage): Promise<string> {
-    return this.translate(chatMessage.message, this.sourceLanguage, this.destinationLanguage)
+    return this.translate(chatMessage.message, { sourceLanguage: undefined, destinationLanguage: this.destinationLanguage })
   }
 
   async translateToSourceLanguage(message: string): Promise<string> {
-    return this.translate(message, this.destinationLanguage, this.sourceLanguage)
+    return this.translate(message, { sourceLanguage: this.destinationLanguage, destinationLanguage: this.sourceLanguage })
   }
 
-  private async translate(message: string, sourceLanguage: Language, destinationLanguage: Language): Promise<string> {
+  private async translate(message: string, input: { sourceLanguage?: Language; destinationLanguage: Language }): Promise<string> {
     try {
       const result = await googletrans(message, {
-        from: sourceLanguage,
-        to: destinationLanguage,
+        from: input.sourceLanguage,
+        to: input.destinationLanguage,
         signal: AbortSignal.timeout(DEFAULT_REQUEST_TIMEOUT)
       })
       return result.text
